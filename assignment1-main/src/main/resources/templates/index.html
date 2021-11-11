@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gamer Land</title>
+    </head>
+
+    <body>
+        <h1>Gamer Land</h1>
+        <div>
+            <form method="post">
+                <label for="gameName">Name:</label><input type="text" id="gameName" name="name" />
+                <label for="gamePrice">Price:</label><input type="text" id="gamePrice" name="price" />
+                <input type="submit" value="Add" />
+            </form>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price (RON)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="game: ${gameList}">
+                        <td th:text="${game.name}"></td>
+                        <td th:text="${game.price} + RON"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
