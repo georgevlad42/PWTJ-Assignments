@@ -23,8 +23,11 @@
                 </thead>
                 <tbody>
                     <tr th:each="game: ${gameList}">
+                        <!--/*@thymesVar id="game" type="ro.unibuc.egv.assignment1.main.dtos.GameDto"*/-->
+                        <!--/*@thymesVar id="name" type="ro.unibuc.egv.assignment1.main.dtos.GameDto"*/-->
                         <td th:text="${game.name}"></td>
-                        <td th:text="${game.price} + RON"></td>
+                        <!--/*@thymesVar id="price" type="ro.unibuc.egv.assignment1.main.dtos.GameDto"*/-->
+                        <td th:text="${game.price}"></td>
                     </tr>
                 </tbody>
             </table>
