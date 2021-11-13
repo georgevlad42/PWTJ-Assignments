@@ -3,31 +3,39 @@
     <head>
         <title>Gamer Land</title>
     </head>
-
     <body>
-        <h1>Gamer Land</h1>
-        <div>
+        <h1 style="text-align:center;">Gamer Land</h1>
+        <div style="text-align:center;">
             <form method="post">
-                <label for="gameName">Name:</label><input type="text" id="gameName" name="name" />
-                <label for="gamePrice">Price:</label><input type="text" id="gamePrice" name="price" />
-                <input type="submit" value="Add" />
+                <table style="margin-left:auto; margin-right:auto;">
+                    <tbody>
+                        <tr>
+                            <td> <label for="NewName">Set game name:</label> </td>
+                            <td> <input type="text" id="NewName" name="nameToAdd" minlength="1"/> </td>
+                        </tr>
+                        <tr>
+                            <td> <label for="NewPrice">Set game price:</label> </td>
+                            <td> <input type="number" id="NewPrice" name="priceToAdd" min="1"/> </td>
+                        </tr>
+                    </tbody>
+                </table> <br>
+                <input type="submit" value="Add Game" />
             </form>
-        </div>
-        <div>
-            <table>
+        </div> <br>
+        <div style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Price (RON)</th>
+                        <th>Link</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="game: ${gameList}">
-                        <!--/*@thymesVar id="game" type="ro.unibuc.egv.assignment1.main.dtos.GameDto"*/-->
-                        <!--/*@thymesVar id="name" type="ro.unibuc.egv.assignment1.main.dtos.GameDto"*/-->
                         <td th:text="${game.name}"></td>
-                        <!--/*@thymesVar id="price" type="ro.unibuc.egv.assignment1.main.dtos.GameDto"*/-->
                         <td th:text="${game.price}"></td>
+                        <td> <a th:href="@{https://www.google.com/search(q=${game.name})}">More info</a> </td>
                     </tr>
                 </tbody>
             </table>

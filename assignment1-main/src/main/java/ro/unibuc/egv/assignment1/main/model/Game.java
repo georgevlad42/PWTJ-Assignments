@@ -1,24 +1,30 @@
 package ro.unibuc.egv.assignment1.main.model;
 
+import org.springframework.data.redis.core.RedisHash;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-public final class Game {
+@RedisHash("Game")
+public class Game implements Serializable {
 
-    private final Integer id;
-    private final String name;
-    private final int price;
+    private String id;
+    private String name;
+    private int price;
 
-    public Game(Integer id, String name, int price) {
+    public Game(String id, String name, int price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public Game(String name, int price) {
-        this(null, name, price);
+    public Game (String name, int price){
+        this.id = null;
+        this.name = name;
+        this.price = price;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -28,6 +34,18 @@ public final class Game {
 
     public int getPrice() {
         return price;
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setPrice(int price){
+        this.price = price;
     }
 
     @Override

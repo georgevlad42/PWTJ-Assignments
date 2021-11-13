@@ -1,14 +1,12 @@
 package ro.unibuc.egv.assignment1.main.services;
 
-import ro.unibuc.egv.assignment1.main.dtos.GameDto;
+import ro.unibuc.egv.assignment1.main.model.Game;
 
 import java.util.Set;
 
 public interface GameService {
 
-    void addGame(GameDto gameDto);
-
-    Set<GameDto> getAllGames();
-
+    void addGame(Game game);
+    Set<Game> getAllGames();
 
 }
