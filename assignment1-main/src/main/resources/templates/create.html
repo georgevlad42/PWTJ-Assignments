@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gamer Land - Create</title>
+    </head>
+    <body>
+        <h1 style="text-align:center;">Gamer Land</h1>
+        <h2 style="text-align:center;">Create</h2>
+        <div style="text-align:center;">
+            <form method="post">
+                <table style="margin-left:auto; margin-right:auto;">
+                    <tbody>
+                    <tr>
+                        <td> <label for="NewName">Set game name:</label> </td>
+                        <td> <input type="text" placeholder="Game name" id="NewName" name="nameToAdd" required="required"/> </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="NewPrice">Set game price:</label> </td>
+                        <td> <input type="number" placeholder="Price value" id="NewPrice" name="priceToAdd" min="1" required="required"/> </td>
+                    </tr>
+                    </tbody>
+                </table> <br>
+                <input onclick="messageFunction()" type="submit" value="Add Game" />
+            </form> <br>
+            <form action="http://localhost:8080/">
+                <input type="submit" value="Back to main page" />
+            </form>
+        </div>
+        <script>
+            function messageFunction(){
+                if (document.getElementById("NewName").value.length >= 1 && document.getElementById("NewPrice").value >= 1){
+                    alert('Game added successfully!');
+                }
+            }
+        </script>
+    </body>
+</html>

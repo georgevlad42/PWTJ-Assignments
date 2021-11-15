@@ -7,7 +7,6 @@ import ro.unibuc.egv.assignment1.main.model.Game;
 import ro.unibuc.egv.assignment1.main.services.GameService;
 
 @Controller
-@RequestMapping("/")
 public class GameController {
 
     private final GameService gameService;
@@ -16,31 +15,73 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping("/")
-    public String getAllGames(Model model){
-        model.addAttribute("gameList", gameService.getAllGames());
-        return "index";
+    //region Main page
+    @RequestMapping("/")
+    public String index(){
+        System.out.println("Main page accessed!");
+       return "index";
+    }
+    //endregion
+
+    //region Create page
+    @RequestMapping("/create")
+    public String createInit(){
+        System.out.println("Create page accessed!");
+        return "create";
     }
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public String addGame(@RequestParam("nameToAdd") String name, @RequestParam("priceToAdd") int price, Model model){
-        gameService.addGame(new Game(String.valueOf(gameService.getAllGames().size() + 1), name, price));
+        gameService.saveGame(gameService.getAllGames().size() !=0 ? new Game(String.valueOf(gameService.getAllGames().size() + 1), name, price) : new Game(String.valueOf(1), name, price));
         model.addAttribute("gameList", gameService.getAllGames());
-        return "index";
+        System.out.println("A new game was successfully added!");
+        return "create";
+    }
+    //endregion
+
+    //region Read page
+    @RequestMapping("/read")
+    @GetMapping("/read")
+    public String readInit(Model model){
+        System.out.println("Read page accessed!");
+        model.addAttribute("gameList", gameService.getAllGames());
+        return "read";
+    }
+    //endregion
+
+    //region Update page
+    @RequestMapping("/update")
+    @GetMapping("/update")
+    public String updateInit(Model model){
+        System.out.println("Update page accessed!");
+        model.addAttribute("gameList", gameService.getAllGames());
+        return "update";
     }
 
-//    @PostMapping("/")
-//    public void updateGameName(@RequestParam("selectedGame") Game game, @RequestParam("nameForUpdate") String name){
-//        gameRepository.updateName(game, name);
-//    }
-//
-//    @PostMapping("/")
-//    public void updateGamePrice(@RequestParam("selectedGame") Game game, @RequestParam("priceForUpdate") int price){
-//        gameRepository.updatePrice(game, price);
-//    }
-//
-//    @DeleteMapping("/")
-//    public void removeGame(@RequestParam("selectedGame") Game game){
-//        gameRepository.delete(game.getId());
-//    }
+    @PostMapping("/update")
+    public String updateGame(@RequestParam("gameToUpdateID") String id, @RequestParam("nameToUpdate") String name, @RequestParam("priceToUpdate") int price, Model model){
+        gameService.saveGame(new Game(id, name, price));
+        model.addAttribute("gameList", gameService.getAllGames());
+        System.out.println("Game with ID " + id + " was successfully updated!");
+        return "update";
+    }
+
+    //endregion
+
+    //region Delete page
+    @RequestMapping("/delete")
+    public String deleteInit(Model model){
+        System.out.println("Delete page accessed!");
+        model.addAttribute("gameList", gameService.getAllGames());
+        return "delete";
+    }
+
+    @PostMapping("/delete")
+    public String removeGame(@RequestParam("gameToRemoveID") String id, Model model){
+        gameService.deleteGame(id);
+        model.addAttribute("gameList", gameService.getAllGames());
+        System.out.println("Game with ID " + id + " was successfully deleted!");
+        return "delete";
+    }
+    //endregion
 }

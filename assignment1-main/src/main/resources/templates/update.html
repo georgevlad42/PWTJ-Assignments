@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gamer Land - Update</title>
+    </head>
+    <body th:onload="hideDiv()">
+        <h1 style="text-align:center;">Gamer Land</h1>
+        <h2 style="text-align:center;">Update</h2>
+        <div id="content" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price (RON)</th>
+                    <th>New Name</th>
+                    <th>New Price</th>
+                    <th/>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="game: ${gameList}">
+                    <td th:text="${game.name}"></td>
+                    <td th:text="${game.price}"></td>
+                    <form method="post">
+                        <td> <input type="text" placeholder="Game name" id="UpdateName" name="nameToUpdate" required="required"/> </td>
+                        <td> <input type="number" placeholder="Price value" id="UpdatePrice" name="priceToUpdate" min="1" required="required"/> </td>
+                        <td>
+                            <input type="hidden" name="gameToUpdateID" th:value="${game.id}"/>
+                            <input onclick="messageFunction()" type="submit" value="Update Game"/>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table> <br>
+        </div>
+        <div id="noContent" style="text-align:center;">
+            <h3 style="text-align:center;">There are no games available to update!</h3>
+        </div>
+        <div style="text-align:center;">
+            <form action="http://localhost:8080/">
+                <input type="submit" value="Back to main page" />
+            </form>
+        </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(gameList)}]]) {
+                    document.getElementById('content').style.display = "block";
+                    document.getElementById('noContent').style.display = "none";
+                } else {
+                    document.getElementById('content').style.display = "none";
+                    document.getElementById('noContent').style.display = "block";
+                }
+            }
+        </script>
+    </body>
+</html>

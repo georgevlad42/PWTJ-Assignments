@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <title>Gamer Land</title>
     </head>
     <body>
         <h1 style="text-align:center;">Gamer Land</h1>
-        <div style="text-align:center;">
-            <form method="post">
-                <table style="margin-left:auto; margin-right:auto;">
-                    <tbody>
-                        <tr>
-                            <td> <label for="NewName">Set game name:</label> </td>
-                            <td> <input type="text" id="NewName" name="nameToAdd" minlength="1"/> </td>
-                        </tr>
-                        <tr>
-                            <td> <label for="NewPrice">Set game price:</label> </td>
-                            <td> <input type="number" id="NewPrice" name="priceToAdd" min="1"/> </td>
-                        </tr>
-                    </tbody>
-                </table> <br>
-                <input type="submit" value="Add Game" />
-            </form>
-        </div> <br>
+        <h2 style="text-align:center;">Main Page</h2>
         <div style="text-align:center;">
             <table style="margin-left:auto; margin-right:auto;">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Price (RON)</th>
-                        <th>Link</th>
+                        <td>Choose an option:</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="game: ${gameList}">
-                        <td th:text="${game.name}"></td>
-                        <td th:text="${game.price}"></td>
-                        <td> <a th:href="@{https://www.google.com/search(q=${game.name})}">More info</a> </td>
+                    <tr>
+                        <td>
+                            <form action="http://localhost:8080/create">
+                                <input type="submit" value="CREATE" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form action="http://localhost:8080/read">
+                                <input type="submit" value="READ" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form action="http://localhost:8080/update">
+                                <input type="submit" value="UPDATE" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form action="http://localhost:8080/delete">
+                                <input type="submit" value="DELETE" />
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

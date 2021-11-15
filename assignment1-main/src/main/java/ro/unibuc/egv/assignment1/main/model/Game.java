@@ -18,12 +18,6 @@ public class Game implements Serializable {
         this.price = price;
     }
 
-    public Game (String name, int price){
-        this.id = null;
-        this.name = name;
-        this.price = price;
-    }
-
     public String getId() {
         return id;
     }
