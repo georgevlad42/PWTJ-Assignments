@@ -6,7 +6,8 @@ import java.util.Set;
 
 public interface GameService {
 
-    void addGame(Game game);
+    void saveGame(Game game);
     Set<Game> getAllGames();
+    void deleteGame (String id);
 
 }

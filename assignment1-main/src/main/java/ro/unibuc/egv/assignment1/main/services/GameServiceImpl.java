@@ -4,10 +4,7 @@ import org.springframework.stereotype.Service;
 import ro.unibuc.egv.assignment1.main.model.Game;
 import ro.unibuc.egv.assignment1.main.repositories.GameRepository;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -19,14 +16,17 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void addGame(Game game) {
-        gameRepository.add(new Game(game.getId(), game.getName(), game.getPrice()));
+    public void saveGame(Game game) {
+        gameRepository.save(game);
     }
 
     @Override
     public Set<Game> getAllGames() {
-        return gameRepository.findAll().stream()
-                .map(game -> new Game(game.getName(), game.getPrice()))
-                .collect(Collectors.collectingAndThen(Collectors.toCollection(LinkedHashSet::new), Collections::unmodifiableSet));
+        return new HashSet<>(gameRepository.findAll().values());
+    }
+
+    @Override
+    public void deleteGame(String id) {
+        gameRepository.delete(id);
     }
 }
