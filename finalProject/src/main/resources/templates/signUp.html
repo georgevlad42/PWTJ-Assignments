@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PSM - Sign Up</title>
+        <style>
+            .required:after {
+                content:" *";
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align:center;">PlayStation Mall</h1>
+        <h2 style="text-align:center;">Sign Up</h2>
+        <div style="text-align:center;">
+            <form method="post">
+                <table style="margin-left:auto; margin-right:auto;">
+                    <tbody>
+                        <!--First Name-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label class="required" for="signUpFirstName">First name</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Last Name-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label class="required" for="signUpLastName">Last name</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Email-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label class="required" for="signUpEmail">Email</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Phone Number-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label class="required" for="signUpPhoneNr">Phone number</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="signUpPhoneNr" name="phoneNrToSignUp" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Username-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label class="required" for="signUpUser">Username</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Password-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label class="required" for="signUpPass">Password</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="password" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" required="required"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" id="passOneButton" value="Show" onclick="showOrHidePassOne()" style="width:50px"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Confirm password-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label class="required" for="verifyPass">Confirm password</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="password" maxlength="50" placeholder="Repeat the password" id="verifyPass" name="passToVerify" required="required"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" id="passTwoButton" value="Show" onclick="showOrHidePassTwo()" style="width:50px"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> <br>
+                <input type="submit" value="Sign Up - WIP" />
+            </form> <br>
+            <form action="http://localhost:8080/">
+                <input type="submit" value="Go back" />
+            </form>
+        </div>
+        <script th:inline="javascript">
+            function showOrHidePassOne(){
+                var text = document.getElementById("signUpPass");
+                var btn = document.getElementById("passOneButton");
+                if (text.type === "password") {
+                    text.type = "text";
+                    btn.value = "Hide";
+                } else {
+                    text.type = "password";
+                    btn.value = "Show";
+                }
+            }
+            function showOrHidePassTwo(){
+                var text = document.getElementById("verifyPass");
+                var btn = document.getElementById("passTwoButton");
+                if (text.type === "password") {
+                    text.type = "text";
+                    btn.value = "Hide";
+                } else {
+                    text.type = "password";
+                    btn.value = "Show";
+                }
+            }
+        </script>
+    </body>
+</html>

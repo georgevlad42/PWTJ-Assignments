@@ -12,6 +12,12 @@ public class User {
     @Column(name = "id", nullable = false)
     private int userID;
 
+    @Column(name = "first_name", unique = true, nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", unique = true, nullable = false)
+    private String lastName;
+
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
@@ -28,8 +34,10 @@ public class User {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    public User(int userID, String username, String password, String email, String phoneNr, Address address) {
+    public User(int userID, String firstName, String lastName, String username, String password, String email, String phoneNr, Address address) {
         this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -39,6 +47,8 @@ public class User {
 
     public User(){
         this.userID = 0;
+        this.firstName = "";
+        this.lastName = "";
         this.username = "";
         this.password = "";
         this.email = "";
@@ -52,6 +62,22 @@ public class User {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -99,18 +125,20 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userID == user.userID && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(phoneNr, user.phoneNr) && Objects.equals(address, user.address);
+        return userID == user.userID && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(phoneNr, user.phoneNr) && Objects.equals(address, user.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, username, password, email, phoneNr, address);
+        return Objects.hash(userID, firstName, lastName, username, password, email, phoneNr, address);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "userID=" + userID +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +

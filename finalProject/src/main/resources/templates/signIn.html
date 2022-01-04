@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PSM - Sign In</title>
+    </head>
+    <body>
+        <h1 style="text-align:center;">PlayStation Mall</h1>
+        <h2 style="text-align:center;">Sign In</h2>
+        <div style="text-align:center;">
+            <form method="post">
+                <table style="margin-left:auto; margin-right:auto;">
+                    <tbody>
+                        <tr>
+                            <td> <label for="signInUser">Username:</label> </td>
+                            <td> <input type="text" placeholder="Your username" id="signInUser" name="userToSignIn" required="required"/> </td>
+                        </tr>
+                        <tr>
+                            <td> <label for="signInPass">Password:</label> </td>
+                            <td> <input type="password" placeholder="Your password" id="signInPass" name="passToSignIn" required="required"/> </td>
+                        </tr>
+                        <tr align="left">
+                            <td/>
+                            <td> <input type="button" id="passButton" value="Show" onclick="showOrHidePass()" style="width:50px"/> </td>
+                        </tr>
+                    </tbody>
+                </table> <br>
+                <input type="submit" value="Sign In - WIP" />
+            </form> <br>
+            <form action="http://localhost:8080/">
+                <input type="submit" value="Go back" />
+            </form>
+        </div>
+        <script th:inline="javascript">
+            function showOrHidePass(){
+                var text = document.getElementById("signInPass");
+                var btn = document.getElementById("passButton");
+                if (text.type === "password") {
+                    text.type = "text";
+                    btn.value = "Hide";
+                } else {
+                    text.type = "password";
+                    btn.value = "Show";
+                }
+            }
+        </script>
+    </body>
+</html>
