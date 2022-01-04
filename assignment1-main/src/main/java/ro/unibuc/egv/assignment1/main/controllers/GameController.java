@@ -18,7 +18,7 @@ public class GameController {
     //region Main page
     @RequestMapping("/")
     public String index(){
-        System.out.println("Main page accessed!");
+       System.out.println("Main page accessed!");
        return "index";
     }
     //endregion
