@@ -1,14 +1,8 @@
 package ro.unibuc.egv.finalProject.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ro.unibuc.egv.finalProject.models.Game;
 
-import java.util.Map;
-
-public interface GameRepository {
-
-    void save (Game game);
-    Map<String, Game> findAll();
-    void update (Game game);
-    void delete (Game game);
+public interface GameRepository extends JpaRepository <Game, Integer> {
 
 }

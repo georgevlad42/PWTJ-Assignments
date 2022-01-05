@@ -28,7 +28,12 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" required="required"/>
+                                            <label for="signUpFirstName" style="font-size:small">(Letters and hyphens only, at least 3 characters)</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -45,7 +50,12 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" required="required"/>
+                                            <label for="signUpLastName" style="font-size:small">(Letters and hyphens only, at least 3 characters)</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -62,7 +72,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" required="required"/>
+                                            <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -96,7 +106,12 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" required="required"/>
+                                            <label for="signUpUser" style="font-size:small">(Alphanumerical characters only, at least 6 characters)</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="^[A-Za-z0-9]{6,}$" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -113,7 +128,12 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="password" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" required="required"/>
+                                            <label for="signUpPass" style="font-size:small">(Any characters, at least 6 characters)</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="password" minlength="6" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" required="required"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -135,7 +155,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="password" maxlength="50" placeholder="Repeat the password" id="verifyPass" name="passToVerify" required="required"/>
+                                            <input type="password" minlength="6" maxlength="50" placeholder="Repeat the password" id="verifyPass" name="passToVerify" required="required"/>
                                         </td>
                                     </tr>
                                     <tr>

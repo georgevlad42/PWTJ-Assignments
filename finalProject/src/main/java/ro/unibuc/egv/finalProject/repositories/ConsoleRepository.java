@@ -1,14 +1,8 @@
 package ro.unibuc.egv.finalProject.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ro.unibuc.egv.finalProject.models.Console;
 
-import java.util.Map;
-
-public interface ConsoleRepository {
-
-    void save (Console console);
-    Map<String, Console> findAll();
-    void update (Console console);
-    void delete (Console console);
+public interface ConsoleRepository extends JpaRepository <Console, Integer> {
 
 }

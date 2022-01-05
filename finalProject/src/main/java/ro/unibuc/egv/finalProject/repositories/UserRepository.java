@@ -1,12 +1,11 @@
 package ro.unibuc.egv.finalProject.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ro.unibuc.egv.finalProject.models.User;
 
-public interface UserRepository {
+import java.util.Optional;
 
-    void save(User user);
-    void logIn(User user);
-    void logOut(User user);
-    void delete(User user);
+public interface UserRepository extends JpaRepository <User, Integer> {
 
+    Optional<User> findByUsername(String username);
 }
