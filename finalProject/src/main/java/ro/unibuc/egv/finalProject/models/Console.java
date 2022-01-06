@@ -14,7 +14,7 @@ public class Console{
     @Column(name = "id", nullable = false)
     private Long consoleID;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product consoleProduct;
 

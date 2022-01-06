@@ -14,7 +14,7 @@ public class Accessory{
     @Column(name = "id", nullable = false)
     private Long accessoryID;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product accessoryProduct;
 

@@ -30,7 +30,7 @@ create table if not exists users(
     unique (phone_nr),
     foreign key (address_id) references addresses (id)
     on update cascade
-    on delete set null
+    on delete cascade
 );
 
 create table if not exists products(

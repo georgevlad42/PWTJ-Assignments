@@ -39,10 +39,23 @@ public class UserController {
 
     @PostMapping("/signUp")
     public String signUpNewUser(@ModelAttribute("newUser") User newUser, Model model, RedirectAttributes redirectAttributes){
-        if (userService.signUpStatus(newUser) != 0) {
-            model.addAttribute("errorCode", userService.signUpStatus(newUser));
-        } else {
+        boolean isUnique = true;
+        if (!userService.isUsernameUnique(newUser.getUsername())) {
+            isUnique = false;
+            model.addAttribute("errorUsername", "Username is already in use!");
+        }
+        if (!userService.isEmailUnique(newUser.getEmail())) {
+            isUnique = false;
+            model.addAttribute("errorEmail", "Email is already in use!");
+        }
+        if (!userService.isPhoneNrUnique(newUser.getPhoneNr())) {
+            isUnique = false;
+            model.addAttribute("errorPhoneNr", "Phone number is already in use!");
+        }
+        if (isUnique) {
             userService.signUp(newUser);
+            redirectAttributes.addFlashAttribute("successSignUp", "Your new account has been created! Enter your details below in order to sign in!");
+            return "redirect:/signIn";
         }
         return "signUp";
     }

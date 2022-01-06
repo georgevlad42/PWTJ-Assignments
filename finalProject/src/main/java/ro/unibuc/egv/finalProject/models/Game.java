@@ -14,7 +14,7 @@ public class Game{
     @Column(name = "id", nullable = false)
     private Long gameID;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product gameProduct;
 

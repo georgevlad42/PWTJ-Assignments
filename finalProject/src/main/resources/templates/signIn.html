@@ -7,6 +7,7 @@
     <body>
         <h1 style="text-align:center;">PlayStation Mall</h1>
         <h2 style="text-align:center;">Sign In</h2>
+        <h3 style="text-align:center; color: green;" th:if="${successSignUp}" th:text="${successSignUp}"></h3>
         <div style="text-align:center;">
             <form method="post">
                 <table style="margin-left:auto; margin-right:auto;">
@@ -20,7 +21,7 @@
                             <td> <input type="password" placeholder="Your password" id="signInPass" name="passToSignIn" required="required"/> </td>
                         </tr>
                         <tr align="left">
-                            <td/>
+                            <td></td>
                             <td> <input type="button" id="passButton" value="Show" onclick="showOrHidePass()" style="width:50px"/> </td>
                         </tr>
                     </tbody>

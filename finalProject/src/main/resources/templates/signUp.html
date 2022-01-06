@@ -11,160 +11,380 @@
         </style>
     </head>
     <body>
-    <label for="errCode"></label><input type="text" id="errCode" th:value="${errorCode}">
         <h1 style="text-align:center;">PlayStation Mall</h1>
         <h2 style="text-align:center;">Sign Up</h2>
-        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
         <div style="text-align:center;">
-            <form method="post" th:action="@{/signUp}" th:object="${newUser}" onsubmit="return checkSignIn();">
-                <table style="margin-left:auto; margin-right:auto;">
+            <form method="post" th:action="@{/signUp}" th:object="${newUser}" onsubmit="return checkPasswords();">
+                <table style="margin-left:auto; margin-right:auto; border-spacing: 10em 0; padding-top: 1em; padding-bottom: 1em;">
                     <tbody>
-                        <!--First Name-->
                         <tr>
+                            <th>User Details</th>
+                            <th>Address Details</th>
+                        </tr>
+                        <tr>
+                            <!--User Details-->
                             <td>
-                                <table style="text-align:left; padding-bottom: 1em">
-                                    <tr>
-                                        <td>
-                                            <label class="required" for="signUpFirstName">First name</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="signUpFirstName" style="font-size:small">(Letters and hyphens only, at least 3 characters)</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" th:field="*{firstName}" required="required"/>
-                                        </td>
-                                    </tr>
+                                <table style="margin-left: auto; margin-right: auto;">
+                                    <tbody>
+                                        <!--First Name-->
+                                        <tr>
+                                            <td>
+                                                <table style="text-align:left; padding-bottom: 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <label class="required" for="signUpFirstName">First name</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="signUpFirstName" style="font-size:small;">(Letters and hyphens only, at least 3 characters)</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" th:field="*{firstName}" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <!--Last Name-->
+                                        <tr>
+                                            <td>
+                                                <table style="text-align:left; padding-bottom: 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <label class="required" for="signUpLastName">Last name</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="signUpLastName" style="font-size:small;">(Letters and hyphens only, at least 3 characters)</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" th:field="*{lastName}" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <!--Email-->
+                                        <tr>
+                                            <td>
+                                                <table style="text-align:left; padding-bottom: 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <label class="required" for="signUpEmail">Email</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div style="color: red;" th:if="${errorEmail}" th:text="${errorEmail}"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" th:field="*{email}" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <!--Phone Number-->
+                                        <tr>
+                                            <td>
+                                                <table style="text-align:left; padding-bottom: 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <label class="required" for="signUpPhoneNr">Phone number</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div style="color: red;" th:if="${errorPhoneNr}" th:text="${errorPhoneNr}"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="signUpPhoneNr" name="phoneNrToSignUp" th:field="*{phoneNr}" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <!--Username-->
+                                        <tr>
+                                            <td>
+                                                <table style="text-align:left; padding-bottom: 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <label class="required" for="signUpUser">Username</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="signUpUser" style="font-size:small;">(Alphanumerical characters only, at least 6 characters)</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div style="color: red;" th:if="${errorUsername}" th:text="${errorUsername}"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input pattern="^[A-Za-z0-9]{6,}$" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" th:field="*{username}" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <!--Password-->
+                                        <tr>
+                                            <td>
+                                                <table style="text-align:left; padding-bottom: 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <label class="required" for="signUpPass">Password</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="signUpPass" style="font-size:small;">(Any characters, at least 6 characters)</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="password" minlength="6" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" th:field="*{password}" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="button" id="passOneButton" value="Show" onclick="showOrHidePassOne()" style="width:50px;"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <!--Confirm password-->
+                                        <tr>
+                                            <td>
+                                                <table style="text-align:left;">
+                                                    <tr>
+                                                        <td>
+                                                            <label class="required" for="verifyPass">Confirm password</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="password" minlength="6" maxlength="50" placeholder="Repeat the password" id="verifyPass" name="passToVerify" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="button" id="passTwoButton" value="Show" onclick="showOrHidePassTwo()" style="width:50px;"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </td>
-                        </tr>
-                        <!--Last Name-->
-                        <tr>
+                            <!--Address Details-->
                             <td>
-                                <table style="text-align:left; padding-bottom: 1em">
-                                    <tr>
-                                        <td>
-                                            <label class="required" for="signUpLastName">Last name</label>
+                                <table style="margin-left: auto; margin-right: auto;">
+                                    <tbody>
+                                        <!--Country-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label class="required" for="signUpCountry">Country</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="4" placeholder="Your country" id="signUpCountry" name="countryToSignUp" th:field="*{address.country}" required="required"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="signUpLastName" style="font-size:small">(Letters and hyphens only, at least 3 characters)</label>
+                                        </tr>
+                                        <!--District-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label class="required" for="signUpDistrict">District</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="4" placeholder="Your district" id="signUpDistrict" name="districtToSignUp" th:field="*{address.district}" required="required"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" th:field="*{lastName}" required="required"/>
+                                        </tr>
+                                        <!--City-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label class="required" for="signUpCity">City</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="1" placeholder="Your city" id="signUpCity" name="cityToSignUp" th:field="*{address.city}" required="required"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <!--Email-->
-                        <tr>
-                            <td>
-                                <table style="text-align:left; padding-bottom: 1em">
-                                    <tr>
-                                        <td>
-                                            <label class="required" for="signUpEmail">Email</label>
+                                        </tr>
+                                        <!--Street-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label class="required" for="signUpStreet">Street</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="4" placeholder="Your street" id="signUpStreet" name="streetToSignUp" th:field="*{address.street}" required="required"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" th:field="*{email}" required="required"/>
+                                        </tr>
+                                        <!--Number-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label class="required" for="signUpNumber">Number</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input pattern="[0-9]{1,}" minlength="1" placeholder="Your street number" id="signUpNumber" name="numberToSignUp" th:field="*{address.number}" required="required"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <!--Phone Number-->
-                        <tr>
-                            <td>
-                                <table style="text-align:left; padding-bottom: 1em">
-                                    <tr>
-                                        <td>
-                                            <label class="required" for="signUpPhoneNr">Phone number</label>
+                                        </tr>
+                                        <!--Building-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label for="signUpBuilding">Building</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="1" placeholder="Your building" id="signUpBuilding" name="buildingToSignUp" th:field="*{address.building}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="signUpPhoneNr" name="phoneNrToSignUp" th:field="*{phoneNr}" required="required"/>
+                                        </tr>
+                                        <!--Entrance-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label for="signUpEntrance">Entrance</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="1" placeholder="Your entrance" id="signUpEntrance" name="entranceToSignUp" th:field="*{address.entrance}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <!--Username-->
-                        <tr>
-                            <td>
-                                <table style="text-align:left; padding-bottom: 1em">
-                                    <tr>
-                                        <td>
-                                            <label class="required" for="signUpUser">Username</label>
+                                        </tr>
+                                        <!--Floor-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label for="signUpFloor">Floor</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input pattern="[0-9]{1,}" minlength="1" placeholder="Your floor number" id="signUpFloor" name="floorToSignUp" th:field="*{address.floor}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="signUpUser" style="font-size:small">(Alphanumerical characters only, at least 6 characters)</label>
+                                        </tr>
+                                        <!--Apartment-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label for="signUpApartment">Apartment</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input pattern="[0-9]{1,}" minlength="1" placeholder="Your apartment number" id="signUpApartment" name="apartmentToSignUp" th:field="*{address.apartment}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input pattern="^[A-Za-z0-9]{6,}$" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" th:field="*{username}" required="required"/>
+                                        </tr>
+                                        <!--Interphone-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left; padding-bottom: 1em">
+                                                <tr>
+                                                    <td>
+                                                        <label for="signUpInterphone">Interphone</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="1" placeholder="Your interphone code" id="signUpInterphone" name="interphoneToSignUp" th:field="*{address.interphone}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <!--Password-->
-                        <tr>
-                            <td>
-                                <table style="text-align:left; padding-bottom: 1em">
-                                    <tr>
-                                        <td>
-                                            <label class="required" for="signUpPass">Password</label>
+                                        </tr>
+                                        <!--Postal Code-->
+                                        <tr>
+                                            <td>
+                                            <table style="text-align:left;">
+                                                <tr>
+                                                    <td>
+                                                        <label class="required" for="signUpPostalCode">Postal Code</label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" minlength="4" placeholder="Your postal code" id="signUpPostalCode" name="postalCodeToSignUp" th:field="*{address.postalCode}" required="required"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="signUpPass" style="font-size:small">(Any characters, at least 6 characters)</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="password" minlength="6" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" th:field="*{password}" required="required"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="button" id="passOneButton" value="Show" onclick="showOrHidePassOne()" style="width:50px"/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <!--Confirm password-->
-                        <tr>
-                            <td>
-                                <table style="text-align:left; padding-bottom: 1em">
-                                    <tr>
-                                        <td>
-                                            <label class="required" for="verifyPass">Confirm password</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="password" minlength="6" maxlength="50" placeholder="Repeat the password" id="verifyPass" name="passToVerify" required="required"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="button" id="passTwoButton" value="Show" onclick="showOrHidePassTwo()" style="width:50px"/>
-                                        </td>
-                                    </tr>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </td>
                         </tr>
@@ -199,32 +419,14 @@
                     btn.value = "Show";
                 }
             }
-            function checkSignIn() {
-                let errCode = parseInt(document.getElementById("errCode").value);
+            function checkPasswords() {
                 let pass1 = document.getElementById("signUpPass").value;
                 let pass2 = document.getElementById("verifyPass").value;
                 if (pass1.localeCompare(pass2) !== 0){
                     alert('Passwords do not match!');
                     return false;
-                } else {
-                    switch (errCode) {
-                        case 0:
-                            alert('Sign up successfully!');
-                            return true;
-                        case 1:
-                            alert('Username is already in use!');
-                            document.getElementById("errCode").value = '';
-                            return false;
-                        case 2:
-                            alert('Email is already in use!');
-                            document.getElementById("errCode").value = '';
-                            return false;
-                        case 3:
-                            alert('Phone number is already in use!');
-                            document.getElementById("errCode").value = '';
-                            return false;
-                    }
                 }
+                return true;
             }
         </script>
     </body>

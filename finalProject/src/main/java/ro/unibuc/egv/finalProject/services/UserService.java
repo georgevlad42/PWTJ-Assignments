@@ -13,20 +13,28 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public int signUpStatus(User user){
-        if (!userRepository.findUserByUsername(user.getUsername()).isEmpty()){
-            return 1; // "Username is already in use!"
-        }
-        if (!userRepository.findUserByEmail(user.getEmail()).isEmpty()){
-            return 2; // "Email is already in use!"
-        }
-        if (!userRepository.findUserByPhoneNr(user.getPhoneNr()).isEmpty()){
-            return 3; // "Phone number is already in use!"
-        }
-        return 0; // "Success!"
+    public boolean isUsernameUnique(String username) {
+        return userRepository.findUserByUsername(username).isEmpty(); // "Username is already in use!"
+    }
+
+    public boolean isEmailUnique(String email) {
+        return userRepository.findUserByEmail(email).isEmpty(); // "Email is already in use!"
+    }
+
+    public boolean isPhoneNrUnique(String phoneNr) {
+        return userRepository.findUserByPhoneNr(phoneNr).isEmpty(); // "Phone number is already in use!"
     }
 
     public void signUp(User user){
+        if (user.getAddress().getBuilding().equals("")){
+            user.getAddress().setBuilding(null);
+        }
+        if (user.getAddress().getEntrance().equals("")){
+            user.getAddress().setEntrance(null);
+        }
+        if (user.getAddress().getInterphone().equals("")){
+            user.getAddress().setInterphone(null);
+        }
         userRepository.save(user);
     }
 

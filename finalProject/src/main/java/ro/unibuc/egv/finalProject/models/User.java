@@ -35,7 +35,7 @@ public class User {
     @Column(name = "online", nullable = false)
     private boolean online;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 

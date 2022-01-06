@@ -18,10 +18,10 @@ public class Product {
     private String name;
 
     @Column(name = "price", nullable = false)
-    private double price;
+    private Double price;
 
     @Column(name = "quantity", nullable = false)
-    private int quantity;
+    private Integer quantity;
 
     @Column(name = "product_desc")
     private String description;
@@ -38,7 +38,7 @@ public class Product {
     @OneToOne(mappedBy = "accessoryProduct")
     private Accessory accessory;
 
-    public Product(Long productID, String name, double price, int quantity, String description, String status) {
+    public Product(Long productID, String name, Double price, Integer quantity, String description, String status) {
         this.productID = productID;
         this.name = name;
         this.price = price;
@@ -67,19 +67,19 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

@@ -27,7 +27,7 @@ public class Address {
     private String street;
 
     @Column(name = "nr", nullable = false)
-    private int number;
+    private Integer number;
 
     @Column(name = "building")
     private String building;
@@ -36,10 +36,10 @@ public class Address {
     private String entrance;
 
     @Column(name = "floor")
-    private int floor;
+    private Integer floor;
 
     @Column(name = "apartment")
-    private int apartment;
+    private Integer apartment;
 
     @Column(name = "interphone")
     private String interphone;
@@ -50,7 +50,7 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private User user;
 
-    public Address(Long addressID, String country, String district, String city, String street, int number, String building, String entrance, int floor, int apartment, String interphone, String postalCode) {
+    public Address(Long addressID, String country, String district, String city, String street, Integer number, String building, String entrance, Integer floor, Integer apartment, String interphone, String postalCode) {
         this.addressID = addressID;
         this.country = country;
         this.district = district;
@@ -109,11 +109,11 @@ public class Address {
         this.street = street;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -133,19 +133,19 @@ public class Address {
         this.entrance = entrance;
     }
 
-    public int getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setFloor(int floor) {
+    public void setFloor(Integer floor) {
         this.floor = floor;
     }
 
-    public int getApartment() {
+    public Integer getApartment() {
         return apartment;
     }
 
-    public void setApartment(int apartment) {
+    public void setApartment(Integer apartment) {
         this.apartment = apartment;
     }
 
