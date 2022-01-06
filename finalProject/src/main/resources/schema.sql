@@ -1,7 +1,7 @@
 create database if not exists finalprojectpwtj;
 
 create table if not exists addresses(
-    id int not null auto_increment primary key,
+    id bigint not null auto_increment primary key,
     country varchar(50) not null,
     district varchar(50) not null,
     city varchar(50) not null,
@@ -16,7 +16,7 @@ create table if not exists addresses(
 );
 
 create table if not exists users(
-    id int not null auto_increment primary key,
+    id bigint not null auto_increment primary key,
     first_name varchar(30) not null,
     last_name varchar(30) not null,
     username varchar(50) not null,
@@ -24,7 +24,7 @@ create table if not exists users(
     email varchar(255) not null,
     phone_nr varchar(10) not null,
     online boolean not null,
-    address_id int null,
+    address_id bigint null,
     unique (username),
     unique (email),
     unique (phone_nr),
@@ -34,7 +34,7 @@ create table if not exists users(
 );
 
 create table if not exists products(
-    id int not null auto_increment primary key,
+    id bigint not null auto_increment primary key,
     product_name varchar(50) not null,
     price decimal(10, 2) not null,
     quantity int not null,
@@ -44,8 +44,8 @@ create table if not exists products(
 );
 
 create table if not exists consoles(
-    id int not null auto_increment primary key,
-    product_id int not null,
+    id bigint not null auto_increment primary key,
+    product_id bigint not null,
     edition varchar(20) not null,
     spec_gpu varchar(150) not null,
     spec_cpu varchar(110) not null,
@@ -61,8 +61,8 @@ create table if not exists consoles(
 );
 
 create table if not exists games(
-    id int not null auto_increment primary key,
-    product_id int not null,
+    id bigint not null auto_increment primary key,
+    product_id bigint not null,
     platform varchar(20) not null,
     edition varchar(20) not null,
     genre varchar(30) not null,
@@ -75,8 +75,8 @@ create table if not exists games(
 );
 
 create table if not exists accessories(
-    id int not null auto_increment primary key,
-    product_id int not null,
+    id bigint not null auto_increment primary key,
+    product_id bigint not null,
     acc_type varchar(50) not null,
     brand varchar(50) not null,
     compatibility varchar(50) not null,

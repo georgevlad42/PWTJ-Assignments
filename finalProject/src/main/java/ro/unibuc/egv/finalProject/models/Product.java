@@ -1,5 +1,7 @@
 package ro.unibuc.egv.finalProject.models;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int productID;
+    private Long productID;
 
     @Column(name = "product_name", unique = true, nullable = false)
     private String name;
@@ -36,7 +38,7 @@ public class Product {
     @OneToOne(mappedBy = "accessoryProduct")
     private Accessory accessory;
 
-    public Product(int productID, String name, double price, int quantity, String description, String status) {
+    public Product(Long productID, String name, double price, int quantity, String description, String status) {
         this.productID = productID;
         this.name = name;
         this.price = price;
@@ -46,19 +48,14 @@ public class Product {
     }
 
     public Product(){
-        this.productID = 0;
-        this.name = "";
-        this.price = 0;
-        this.quantity = 0;
-        this.description = null;
-        this.status = "";
+
     }
 
-    public int getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(Long productID) {
         this.productID = productID;
     }
 
@@ -105,25 +102,27 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Product product = (Product) o;
-        return productID == product.productID && Double.compare(product.price, price) == 0 && quantity == product.quantity && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(status, product.status);
+        return productID != null && Objects.equals(productID, product.productID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productID, name, price, quantity, description, status);
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "productID=" + productID +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+        return getClass().getSimpleName() + "(" +
+                "productID = " + productID + ", " +
+                "name = " + name + ", " +
+                "price = " + price + ", " +
+                "quantity = " + quantity + ", " +
+                "description = " + description + ", " +
+                "status = " + status + ", " +
+                "console = " + console + ", " +
+                "game = " + game + ", " +
+                "accessory = " + accessory + ")";
     }
 }

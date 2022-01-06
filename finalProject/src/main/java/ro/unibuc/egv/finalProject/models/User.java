@@ -1,5 +1,7 @@
 package ro.unibuc.egv.finalProject.models;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,12 +12,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int userID;
+    private Long userID;
 
-    @Column(name = "first_name", unique = true, nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", unique = true, nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(name = "username", unique = true, nullable = false)
@@ -37,7 +39,7 @@ public class User {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    public User(int userID, String firstName, String lastName, String username, String password, String email, String phoneNr, boolean online, Address address) {
+    public User(Long userID, String firstName, String lastName, String username, String password, String email, String phoneNr, boolean online, Address address) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,22 +52,14 @@ public class User {
     }
 
     public User(){
-        this.userID = 0;
-        this.firstName = "";
-        this.lastName = "";
-        this.username = "";
-        this.password = "";
-        this.email = "";
-        this.phoneNr = "";
-        this.online = false;
-        this.address = null;
+
     }
 
-    public int getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
@@ -136,28 +130,27 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return userID == user.userID && online == user.online && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(phoneNr, user.phoneNr) && Objects.equals(address, user.address);
+        return userID != null && Objects.equals(userID, user.userID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, firstName, lastName, username, password, email, phoneNr, online, address);
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "userID=" + userID +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNr='" + phoneNr + '\'' +
-                ", online=" + online +
-                ", address=" + address +
-                '}';
+        return getClass().getSimpleName() + "(" +
+                "userID = " + userID + ", " +
+                "firstName = " + firstName + ", " +
+                "lastName = " + lastName + ", " +
+                "username = " + username + ", " +
+                "password = " + password + ", " +
+                "email = " + email + ", " +
+                "phoneNr = " + phoneNr + ", " +
+                "online = " + online + ", " +
+                "address = " + address + ")";
     }
 }

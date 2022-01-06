@@ -1,5 +1,7 @@
 package ro.unibuc.egv.finalProject.models;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ public class Console{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int consoleID;
+    private Long consoleID;
 
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -43,7 +45,7 @@ public class Console{
     @Column(name = "color", nullable = false)
     private String color;
 
-    public Console(int consoleID, String edition, String GPU, String CPU, String memory, String storage, String sound, String OS, String media, String color) {
+    public Console(Long consoleID, String edition, String GPU, String CPU, String memory, String storage, String sound, String OS, String media, String color) {
         this.consoleID = consoleID;
         this.edition = edition;
         this.GPU = GPU;
@@ -57,23 +59,14 @@ public class Console{
     }
 
     public Console (){
-        this.consoleID = 0;
-        this.edition = "";
-        this.GPU = "";
-        this.CPU = "";
-        this.memory = "";
-        this.storage = "";
-        this.sound = "";
-        this.OS = "";
-        this.media = "";
-        this.color = "";
+
     }
 
-    public int getConsoleID() {
+    public Long getConsoleID() {
         return consoleID;
     }
 
-    public void setConsoleID(int consoleID) {
+    public void setConsoleID(Long consoleID) {
         this.consoleID = consoleID;
     }
 
@@ -152,29 +145,29 @@ public class Console{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Console console = (Console) o;
-        return consoleID == console.consoleID && Objects.equals(edition, console.edition) && Objects.equals(GPU, console.GPU) && Objects.equals(CPU, console.CPU) && Objects.equals(memory, console.memory) && Objects.equals(storage, console.storage) && Objects.equals(sound, console.sound) && Objects.equals(OS, console.OS) && Objects.equals(media, console.media) && Objects.equals(color, console.color);
+        return consoleID != null && Objects.equals(consoleID, console.consoleID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(consoleID, edition, GPU, CPU, memory, storage, sound, OS, media, color);
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        return "Console{" +
-                "consoleID=" + consoleID +
-                ", edition='" + edition + '\'' +
-                ", GPU='" + GPU + '\'' +
-                ", CPU='" + CPU + '\'' +
-                ", memory='" + memory + '\'' +
-                ", storage='" + storage + '\'' +
-                ", sound='" + sound + '\'' +
-                ", OS='" + OS + '\'' +
-                ", media='" + media + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return getClass().getSimpleName() + "(" +
+                "consoleID = " + consoleID + ", " +
+                "consoleProduct = " + consoleProduct + ", " +
+                "edition = " + edition + ", " +
+                "GPU = " + GPU + ", " +
+                "CPU = " + CPU + ", " +
+                "memory = " + memory + ", " +
+                "storage = " + storage + ", " +
+                "sound = " + sound + ", " +
+                "OS = " + OS + ", " +
+                "media = " + media + ", " +
+                "color = " + color + ")";
     }
 }

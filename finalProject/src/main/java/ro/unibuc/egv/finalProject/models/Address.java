@@ -1,5 +1,7 @@
 package ro.unibuc.egv.finalProject.models;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int addressID;
+    private Long addressID;
 
     @Column(name = "country", nullable = false)
     private String country;
@@ -48,7 +50,7 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private User user;
 
-    public Address(int addressID, String country, String district, String city, String street, int number, String building, String entrance, int floor, int apartment, String interphone, String postalCode) {
+    public Address(Long addressID, String country, String district, String city, String street, int number, String building, String entrance, int floor, int apartment, String interphone, String postalCode) {
         this.addressID = addressID;
         this.country = country;
         this.district = district;
@@ -64,25 +66,14 @@ public class Address {
     }
 
     public Address(){
-        this.addressID = 0;
-        this.country = "";
-        this.district = "";
-        this.city = "";
-        this.street = "";
-        this.number = 0;
-        this.building = null;
-        this.entrance = null;
-        this.floor = -1;
-        this.apartment = -1;
-        this.interphone = null;
-        this.postalCode = "";
+
     }
 
-    public int getAddressID() {
+    public Long getAddressID() {
         return addressID;
     }
 
-    public void setAddressID(int addressID) {
+    public void setAddressID(Long addressID) {
         this.addressID = addressID;
     }
 
@@ -177,31 +168,31 @@ public class Address {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Address address = (Address) o;
-        return addressID == address.addressID && number == address.number && floor == address.floor && apartment == address.apartment && Objects.equals(country, address.country) && Objects.equals(district, address.district) && Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(building, address.building) && Objects.equals(entrance, address.entrance) && Objects.equals(interphone, address.interphone) && Objects.equals(postalCode, address.postalCode);
+        return addressID != null && Objects.equals(addressID, address.addressID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressID, country, district, city, street, number, building, entrance, floor, apartment, interphone, postalCode);
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        return "Address{" +
-                "addressID=" + addressID +
-                ", country='" + country + '\'' +
-                ", district='" + district + '\'' +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", number=" + number +
-                ", building='" + building + '\'' +
-                ", entrance='" + entrance + '\'' +
-                ", floor=" + floor +
-                ", apartment=" + apartment +
-                ", interphone='" + interphone + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                '}';
+        return getClass().getSimpleName() + "(" +
+                "addressID = " + addressID + ", " +
+                "country = " + country + ", " +
+                "district = " + district + ", " +
+                "city = " + city + ", " +
+                "street = " + street + ", " +
+                "number = " + number + ", " +
+                "building = " + building + ", " +
+                "entrance = " + entrance + ", " +
+                "floor = " + floor + ", " +
+                "apartment = " + apartment + ", " +
+                "interphone = " + interphone + ", " +
+                "postalCode = " + postalCode + ", " +
+                "user = " + user + ")";
     }
 }

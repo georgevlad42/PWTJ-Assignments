@@ -1,5 +1,7 @@
 package ro.unibuc.egv.finalProject.models;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ public class Accessory{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int accessoryID;
+    private Long accessoryID;
 
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -28,7 +30,7 @@ public class Accessory{
     @Column(name = "color", nullable = false)
     private String color;
 
-    public Accessory(int accessoryID, String type, String brand, String compatibility, String color) {
+    public Accessory(Long accessoryID, String type, String brand, String compatibility, String color) {
         this.accessoryID = accessoryID;
         this.type = type;
         this.brand = brand;
@@ -37,18 +39,14 @@ public class Accessory{
     }
 
     public Accessory() {
-        this.accessoryID = 0;
-        this.type = "";
-        this.brand = "";
-        this.compatibility = "";
-        this.color = "";
+
     }
 
-    public int getAccessoryID() {
+    public Long getAccessoryID() {
         return accessoryID;
     }
 
-    public void setAccessoryID(int accessoryID) {
+    public void setAccessoryID(Long accessoryID) {
         this.accessoryID = accessoryID;
     }
 
@@ -87,24 +85,24 @@ public class Accessory{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Accessory accessory = (Accessory) o;
-        return accessoryID == accessory.accessoryID && Objects.equals(type, accessory.type) && Objects.equals(brand, accessory.brand) && Objects.equals(compatibility, accessory.compatibility) && Objects.equals(color, accessory.color);
+        return accessoryID != null && Objects.equals(accessoryID, accessory.accessoryID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessoryID, type, brand, compatibility, color);
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        return "Accessory{" +
-                "accessoryID=" + accessoryID +
-                ", type='" + type + '\'' +
-                ", brand='" + brand + '\'' +
-                ", compatibility='" + compatibility + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return getClass().getSimpleName() + "(" +
+                "accessoryID = " + accessoryID + ", " +
+                "accessoryProduct = " + accessoryProduct + ", " +
+                "type = " + type + ", " +
+                "brand = " + brand + ", " +
+                "compatibility = " + compatibility + ", " +
+                "color = " + color + ")";
     }
 }

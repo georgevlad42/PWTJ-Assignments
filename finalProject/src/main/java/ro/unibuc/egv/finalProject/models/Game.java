@@ -1,5 +1,7 @@
 package ro.unibuc.egv.finalProject.models;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ public class Game{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int gameID;
+    private Long gameID;
 
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -34,7 +36,7 @@ public class Game{
     @Column(name = "developer", nullable = false)
     private String developer;
 
-    public Game(int gameID, String platform, String edition, String genre, String gameMode, String publisher, String developer) {
+    public Game(Long gameID, String platform, String edition, String genre, String gameMode, String publisher, String developer) {
         this.gameID = gameID;
         this.platform = platform;
         this.edition = edition;
@@ -45,20 +47,14 @@ public class Game{
     }
 
     public Game() {
-        this.gameID = 0;
-        this.platform = "";
-        this.edition = "";
-        this.genre = "";
-        this.gameMode = "";
-        this.publisher = "";
-        this.developer = "";
+
     }
 
-    public int getGameID() {
+    public Long getGameID() {
         return gameID;
     }
 
-    public void setGameID(int gameID) {
+    public void setGameID(Long gameID) {
         this.gameID = gameID;
     }
 
@@ -113,26 +109,26 @@ public class Game{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Game game = (Game) o;
-        return gameID == game.gameID && Objects.equals(platform, game.platform) && Objects.equals(edition, game.edition) && Objects.equals(genre, game.genre) && Objects.equals(gameMode, game.gameMode) && Objects.equals(publisher, game.publisher) && Objects.equals(developer, game.developer);
+        return gameID != null && Objects.equals(gameID, game.gameID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameID, platform, edition, genre, gameMode, publisher, developer);
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        return "Game{" +
-                "gameID=" + gameID +
-                ", platform='" + platform + '\'' +
-                ", edition='" + edition + '\'' +
-                ", genre='" + genre + '\'' +
-                ", gameMode='" + gameMode + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", developer='" + developer + '\'' +
-                '}';
+        return getClass().getSimpleName() + "(" +
+                "gameID = " + gameID + ", " +
+                "gameProduct = " + gameProduct + ", " +
+                "platform = " + platform + ", " +
+                "edition = " + edition + ", " +
+                "genre = " + genre + ", " +
+                "gameMode = " + gameMode + ", " +
+                "publisher = " + publisher + ", " +
+                "developer = " + developer + ")";
     }
 }

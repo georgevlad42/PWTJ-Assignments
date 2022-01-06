@@ -11,10 +11,12 @@
         </style>
     </head>
     <body>
+    <label for="errCode"></label><input type="text" id="errCode" th:value="${errorCode}">
         <h1 style="text-align:center;">PlayStation Mall</h1>
         <h2 style="text-align:center;">Sign Up</h2>
+        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
         <div style="text-align:center;">
-            <form method="post">
+            <form method="post" th:action="@{/signUp}" th:object="${newUser}" onsubmit="return checkSignIn();">
                 <table style="margin-left:auto; margin-right:auto;">
                     <tbody>
                         <!--First Name-->
@@ -33,7 +35,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" required="required"/>
+                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" th:field="*{firstName}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -55,7 +57,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" required="required"/>
+                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" th:field="*{lastName}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -72,7 +74,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" required="required"/>
+                                            <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" th:field="*{email}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -89,7 +91,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="signUpPhoneNr" name="phoneNrToSignUp" required="required"/>
+                                            <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="signUpPhoneNr" name="phoneNrToSignUp" th:field="*{phoneNr}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -111,7 +113,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="^[A-Za-z0-9]{6,}$" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" required="required"/>
+                                            <input pattern="^[A-Za-z0-9]{6,}$" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" th:field="*{username}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -133,7 +135,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="password" minlength="6" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" required="required"/>
+                                            <input type="password" minlength="6" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" th:field="*{password}" required="required"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -168,16 +170,16 @@
                         </tr>
                     </tbody>
                 </table> <br>
-                <input type="submit" value="Sign Up - WIP" />
+                <input type="submit" id="signUpSubmit" value="Sign Up" />
             </form> <br>
-            <form action="http://localhost:8080/">
+            <a th:href="@{/}">
                 <input type="submit" value="Go back" />
-            </form>
+            </a>
         </div>
         <script th:inline="javascript">
             function showOrHidePassOne(){
-                var text = document.getElementById("signUpPass");
-                var btn = document.getElementById("passOneButton");
+                let text = document.getElementById("signUpPass");
+                let btn = document.getElementById("passOneButton");
                 if (text.type === "password") {
                     text.type = "text";
                     btn.value = "Hide";
@@ -187,14 +189,41 @@
                 }
             }
             function showOrHidePassTwo(){
-                var text = document.getElementById("verifyPass");
-                var btn = document.getElementById("passTwoButton");
+                let text = document.getElementById("verifyPass");
+                let btn = document.getElementById("passTwoButton");
                 if (text.type === "password") {
                     text.type = "text";
                     btn.value = "Hide";
                 } else {
                     text.type = "password";
                     btn.value = "Show";
+                }
+            }
+            function checkSignIn() {
+                let errCode = parseInt(document.getElementById("errCode").value);
+                let pass1 = document.getElementById("signUpPass").value;
+                let pass2 = document.getElementById("verifyPass").value;
+                if (pass1.localeCompare(pass2) !== 0){
+                    alert('Passwords do not match!');
+                    return false;
+                } else {
+                    switch (errCode) {
+                        case 0:
+                            alert('Sign up successfully!');
+                            return true;
+                        case 1:
+                            alert('Username is already in use!');
+                            document.getElementById("errCode").value = '';
+                            return false;
+                        case 2:
+                            alert('Email is already in use!');
+                            document.getElementById("errCode").value = '';
+                            return false;
+                        case 3:
+                            alert('Phone number is already in use!');
+                            document.getElementById("errCode").value = '';
+                            return false;
+                    }
                 }
             }
         </script>
