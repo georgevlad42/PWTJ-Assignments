@@ -23,7 +23,6 @@ create table if not exists users(
     userpass varchar(50) not null,
     email varchar(255) not null,
     phone_nr varchar(10) not null,
-    online boolean not null,
     address_id bigint null,
     unique (username),
     unique (email),
@@ -86,8 +85,8 @@ create table if not exists accessories(
     on delete cascade
 );
 
-insert into users (first_name, last_name, username, userpass, email, phone_nr, online)
-select 'George-Vlad', 'Ene', 'admin', 'admin', 'admin@PSM.com', '0123456789', 0 from dual
+insert into users (first_name, last_name, username, userpass, email, phone_nr)
+select 'George-Vlad', 'Ene', 'adminPSM', 'adminPSM', 'admin@PSM.com', '0123456789' from dual
 where not exists (select * from users);
 
 insert into addresses (country, district, city, street, nr, postal_code)

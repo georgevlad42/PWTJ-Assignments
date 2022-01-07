@@ -32,14 +32,11 @@ public class User {
     @Column(name = "phone_nr", unique = true, nullable = false)
     private String phoneNr;
 
-    @Column(name = "online", nullable = false)
-    private boolean online;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    public User(Long userID, String firstName, String lastName, String username, String password, String email, String phoneNr, boolean online, Address address) {
+    public User(Long userID, String firstName, String lastName, String username, String password, String email, String phoneNr, Address address) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,7 +44,6 @@ public class User {
         this.password = password;
         this.email = email;
         this.phoneNr = phoneNr;
-        this.online = online;
         this.address = address;
     }
 
@@ -111,14 +107,6 @@ public class User {
         this.phoneNr = phoneNr;
     }
 
-    public boolean isOnline() {
-        return online;
-    }
-
-    public void setOnline(boolean online) {
-        this.online = online;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -150,7 +138,6 @@ public class User {
                 "password = " + password + ", " +
                 "email = " + email + ", " +
                 "phoneNr = " + phoneNr + ", " +
-                "online = " + online + ", " +
                 "address = " + address + ")";
     }
 }

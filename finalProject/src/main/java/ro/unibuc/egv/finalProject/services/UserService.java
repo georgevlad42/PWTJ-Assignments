@@ -13,6 +13,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public String signIn(String username, String password) {
+        if (userRepository.findUserByUsername(username).isEmpty()) return "Account doesn't exist!";
+        if (userRepository.findUserByUsernameAndPassword(username, password).isEmpty()) return "Wrong password!";
+        return "OK";
+    }
+
     public boolean isUsernameUnique(String username) {
         return userRepository.findUserByUsername(username).isEmpty(); // "Username is already in use!"
     }
