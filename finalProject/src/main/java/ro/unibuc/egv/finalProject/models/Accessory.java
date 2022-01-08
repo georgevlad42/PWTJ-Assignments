@@ -1,7 +1,5 @@
 package ro.unibuc.egv.finalProject.models;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -85,14 +83,14 @@ public class Accessory{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Accessory accessory = (Accessory) o;
-        return accessoryID != null && Objects.equals(accessoryID, accessory.accessoryID);
+        return Objects.equals(accessoryID, accessory.accessoryID) && Objects.equals(accessoryProduct, accessory.accessoryProduct) && Objects.equals(type, accessory.type) && Objects.equals(brand, accessory.brand) && Objects.equals(compatibility, accessory.compatibility) && Objects.equals(color, accessory.color);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(accessoryID, accessoryProduct, type, brand, compatibility, color);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package ro.unibuc.egv.finalProject.models;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -145,14 +143,14 @@ public class Console{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Console console = (Console) o;
-        return consoleID != null && Objects.equals(consoleID, console.consoleID);
+        return Objects.equals(consoleID, console.consoleID) && Objects.equals(consoleProduct, console.consoleProduct) && Objects.equals(edition, console.edition) && Objects.equals(GPU, console.GPU) && Objects.equals(CPU, console.CPU) && Objects.equals(memory, console.memory) && Objects.equals(storage, console.storage) && Objects.equals(sound, console.sound) && Objects.equals(OS, console.OS) && Objects.equals(media, console.media) && Objects.equals(color, console.color);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(consoleID, consoleProduct, edition, GPU, CPU, memory, storage, sound, OS, media, color);
     }
 
     @Override

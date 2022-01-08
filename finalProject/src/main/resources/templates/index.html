@@ -11,22 +11,23 @@
         <div style="text-align:center;">
             <table style="margin-left:auto; margin-right:auto;">
                 <tbody>
-                <tr>
-                    <td>
-                        <a th:href="@{/signIn}">
-                            <input type="submit" value="Sign In" />
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a th:href="@{/signUp}">
-                            <input type="submit" value="Sign Up" />
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/signIn}">
+                                <input type="submit" value="Sign In" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/signUp}">
+                                <input type="submit" value="Sign Up" />
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        <h3 style="text-align: center; color: red;" th:if="${deleteMessage}" th:text="${deleteMessage}"></h3>
     </body>
 </html>

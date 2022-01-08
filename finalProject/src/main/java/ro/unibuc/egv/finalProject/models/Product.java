@@ -1,7 +1,5 @@
 package ro.unibuc.egv.finalProject.models;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -102,14 +100,14 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return productID != null && Objects.equals(productID, product.productID);
+        return Objects.equals(productID, product.productID) && Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(quantity, product.quantity) && Objects.equals(description, product.description) && Objects.equals(status, product.status);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(productID, name, price, quantity, description, status);
     }
 
     @Override
@@ -120,9 +118,6 @@ public class Product {
                 "price = " + price + ", " +
                 "quantity = " + quantity + ", " +
                 "description = " + description + ", " +
-                "status = " + status + ", " +
-                "console = " + console + ", " +
-                "game = " + game + ", " +
-                "accessory = " + accessory + ")";
+                "status = " + status + ")";
     }
 }

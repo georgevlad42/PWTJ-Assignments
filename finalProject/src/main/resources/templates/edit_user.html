@@ -6,11 +6,240 @@
     </head>
     <body>
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Edit User Details - WIP</h2> <br>
+        <h2 style="text-align:center;">Edit User Details</h2> <br>
+        <h3 style="text-align:center; color: green;" th:if="${successEditUser}" th:text="${successEditUser}"></h3>
+        <h3 style="text-align:center; color: red;" th:if="${errorEditUser}" th:text="${errorEditUser}"></h3>
         <div style="text-align: center;">
+            <form method="post" th:action="@{/settings/edit_user}" th:object="${tempUser}" onsubmit="return checkEditPasswords();">
+                <table style="margin-left: auto; margin-right: auto;">
+                    <tbody>
+                    <!--First Name-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left; padding-bottom: 1em">
+                                <tr>
+                                    <td>
+                                        <label for="editFirstName">First name</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="editFirstName" style="font-size:small;">(Letters and hyphens only, at least 3 characters)</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="editFirstName" name="firstNameToEdit" th:field="*{firstName}" th:value="*{firstName}" required="required"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--Last Name-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left; padding-bottom: 1em">
+                                <tr>
+                                    <td>
+                                        <label for="editLastName">Last name</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="editLastName" style="font-size:small;">(Letters and hyphens only, at least 3 characters)</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="editLastName" name="lastNameToEdit" th:field="*{lastName}" th:value="*{lastName}" required="required"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--Email-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left; padding-bottom: 1em">
+                                <tr>
+                                    <td>
+                                        <label for="editEmail">Email</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="color: red;" th:if="${errorEditEmail}" th:text="${errorEditEmail}"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="editEmail" name="emailToEdit" th:field="*{email}" th:value="*{email}" required="required"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--Phone Number-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left; padding-bottom: 1em">
+                                <tr>
+                                    <td>
+                                        <label for="editPhoneNr">Phone number</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="color: red;" th:if="${errorEditPhoneNr}" th:text="${errorEditPhoneNr}"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="editPhoneNr" name="phoneNrToEdit" th:field="*{phoneNr}" th:value="*{phoneNr}" required="required"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--Username-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left; padding-bottom: 1em">
+                                <tr>
+                                    <td>
+                                        <label for="editUser">Username</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input style="color: dimgrey;" pattern="^[A-Za-z0-9]{6,}$" maxlength="50" id="editUser" name="userToEdit" th:field="*{username}" th:value="*{username}" readonly="readonly"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--Current password-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left; padding-bottom: 1em">
+                                <tr>
+                                    <td>
+                                        <label for="editCurrentPass">Password</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input style="color: dimgrey;" type="password" minlength="6" maxlength="50" id="editCurrentPass" name="currentPassToEdit" th:value="*{password}" readonly="readonly"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--Old password-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left;">
+                                <tr>
+                                    <td>
+                                        <label for="editOldPass">Old password</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="editOldPass" style="font-size:small;">Leave it empty for no changes</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="password" maxlength="50" placeholder="Type the old password" id="editOldPass" name="oldPassToEdit"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="button" id="oldPassButton" value="Show" onclick="showOrHideOldPass()" style="width:50px;"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--New password-->
+                    <tr>
+                        <td>
+                            <table style="text-align:left;">
+                                <tr>
+                                    <td>
+                                        <label for="editNewPass">New password</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="editNewPass" style="font-size:small;">(Any characters, at least 6 characters, case-sensitive)</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="editNewPass" style="font-size:small;">Leave it empty for no changes</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="password" maxlength="50" placeholder="Type the new password" id="editNewPass" name="newPassToEdit" th:field="*{password}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="button" id="newPassButton" value="Show" onclick="showOrHideNewPass()" style="width:50px;"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table> <br>
+                <input type="submit" id="editUserSubmit" value="Update user details" />
+            </form> <br>
             <a th:href="@{/settings}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function showOrHideOldPass(){
+                let text = document.getElementById("editOldPass");
+                let btn = document.getElementById("oldPassButton");
+                if (text.type === "password") {
+                    text.type = "text";
+                    btn.value = "Hide";
+                } else {
+                    text.type = "password";
+                    btn.value = "Show";
+                }
+            }
+            function showOrHideNewPass(){
+                let text = document.getElementById("editNewPass");
+                let btn = document.getElementById("newPassButton");
+                if (text.type === "password") {
+                    text.type = "text";
+                    btn.value = "Hide";
+                } else {
+                    text.type = "password";
+                    btn.value = "Show";
+                }
+            }
+            function checkEditPasswords() {
+                let currPass = document.getElementById("editCurrentPass").value;
+                let oldPass = document.getElementById("editOldPass").value;
+                let newPass = document.getElementById("editNewPass").value;
+                if (oldPass.length === 0 && newPass.length === 0) {
+                    return true;
+                } else if (oldPass.length < 6 || newPass.length < 6) {
+                    alert('The password field(s) should have at least 6 characters!');
+                    return false;
+                } else if (currPass.localeCompare(oldPass) !== 0){
+                    alert('The current and old passwords do not match!');
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </body>
 </html>

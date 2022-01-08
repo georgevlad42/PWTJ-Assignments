@@ -1,7 +1,5 @@
 package ro.unibuc.egv.finalProject.models;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -168,14 +166,14 @@ public class Address {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return addressID != null && Objects.equals(addressID, address.addressID);
+        return Objects.equals(addressID, address.addressID) && Objects.equals(country, address.country) && Objects.equals(district, address.district) && Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(number, address.number) && Objects.equals(building, address.building) && Objects.equals(entrance, address.entrance) && Objects.equals(floor, address.floor) && Objects.equals(apartment, address.apartment) && Objects.equals(interphone, address.interphone) && Objects.equals(postalCode, address.postalCode);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(addressID, country, district, city, street, number, building, entrance, floor, apartment, interphone, postalCode);
     }
 
     @Override
@@ -192,7 +190,6 @@ public class Address {
                 "floor = " + floor + ", " +
                 "apartment = " + apartment + ", " +
                 "interphone = " + interphone + ", " +
-                "postalCode = " + postalCode + ", " +
-                "user = " + user + ")";
+                "postalCode = " + postalCode + ")";
     }
 }

@@ -1,7 +1,5 @@
 package ro.unibuc.egv.finalProject.models;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -109,14 +107,14 @@ public class Game{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Game game = (Game) o;
-        return gameID != null && Objects.equals(gameID, game.gameID);
+        return Objects.equals(gameID, game.gameID) && Objects.equals(gameProduct, game.gameProduct) && Objects.equals(platform, game.platform) && Objects.equals(edition, game.edition) && Objects.equals(genre, game.genre) && Objects.equals(gameMode, game.gameMode) && Objects.equals(publisher, game.publisher) && Objects.equals(developer, game.developer);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(gameID, gameProduct, platform, edition, genre, gameMode, publisher, developer);
     }
 
     @Override

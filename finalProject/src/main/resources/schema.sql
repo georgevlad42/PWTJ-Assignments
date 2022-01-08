@@ -86,7 +86,7 @@ create table if not exists accessories(
 );
 
 insert into users (first_name, last_name, username, userpass, email, phone_nr)
-select 'George-Vlad', 'Ene', 'adminPSM', 'adminPSM', 'admin@PSM.com', '0123456789' from dual
+select 'George-Vlad', 'Ene', 'adminPSM', 'adminPSM', 'admin@psm.com', '0123456789' from dual
 where not exists (select * from users);
 
 insert into addresses (country, district, city, street, nr, postal_code)
