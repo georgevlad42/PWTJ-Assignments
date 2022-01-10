@@ -6,13 +6,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ro.unibuc.egv.finalProject.models.Console;
 import ro.unibuc.egv.finalProject.services.ConsoleService;
+import ro.unibuc.egv.finalProject.services.ProductService;
 
 @Controller
 public class ConsoleController {
 
+    private final ProductService productService;
     private final ConsoleService consoleService;
 
-    public ConsoleController(ConsoleService consoleService) {
+    public ConsoleController(ProductService productService, ConsoleService consoleService) {
+        this.productService = productService;
         this.consoleService = consoleService;
     }
 
@@ -47,9 +50,22 @@ public class ConsoleController {
 
     //region Add Consoles page
     @RequestMapping("/admin/add_products/add_consoles")
-    public String addConsolesInit(){
+    @GetMapping("/admin/add_products/add_consoles")
+    public String addConsolesInit(Model model){
         System.out.println("Add consoles page accessed!");
+        model.addAttribute("newConsole", new Console());
         return "add_consoles";
+    }
+
+    @PostMapping("/admin/add_products/add_consoles")
+    public String addNewConsole(@ModelAttribute("newConsole") Console newConsole, Model model, RedirectAttributes redirectAttributes){
+        if (!productService.isProductNameUnique(newConsole.getProduct().getName())) {
+            model.addAttribute("errorProductName", "Product name is already in use!");
+            return "add_consoles";
+        }
+        consoleService.addConsole(newConsole);
+        redirectAttributes.addFlashAttribute("successAddConsole", "The console has been added successfully!");
+        return "redirect:/admin/add_products/add_consoles";
     }
     //endregion
 

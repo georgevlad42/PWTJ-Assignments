@@ -7,4 +7,6 @@ import ro.unibuc.egv.finalProject.models.Product;
 @Repository
 public interface ProductRepository extends JpaRepository <Product, Long> {
 
+    Product findProductByName(String name);
+
 }

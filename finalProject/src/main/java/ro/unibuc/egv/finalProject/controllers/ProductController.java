@@ -7,10 +7,8 @@ import ro.unibuc.egv.finalProject.services.ProductService;
 @Controller
 public class ProductController {
 
-    private final ProductService productService;
+    public ProductController() {
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
     }
 
     //region Add Products page

@@ -26,4 +26,9 @@ public class ConsoleService {
     public void updateConsoleQuantity(Console console){
         consoleRepository.save(console);
     }
+
+    public void addConsole(Console console){
+        console.getProduct().setStatus("Available");
+        consoleRepository.save(console);
+    }
 }

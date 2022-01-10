@@ -6,8 +6,242 @@
     </head>
     <body>
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Add Consoles - WIP</h2> <br>
+        <h2 style="text-align:center;">Add Consoles</h2>
+        <h3 style="text-align:center; color: green;" th:if="${successAddConsole}" th:text="${successAddConsole}"></h3> <br>
         <div style="text-align: center;">
+            <form method="post" th:action="@{/admin/add_products/add_consoles}" th:object="${newConsole}">
+                <table style="margin-left:auto; margin-right:auto; border-spacing: 10em 0; padding-top: 1em; padding-bottom: 1em;">
+                    <tbody>
+                        <!--Product Name-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleProductName">Product Name</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: red;" th:if="${errorProductName}" th:text="${errorProductName}"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="3" maxlength="50" placeholder="The product name" id="addConsoleProductName" name="consoleProductNameToAdd" th:field="*{product.name}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Price-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleProductPrice">Product Price</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="number" step="0.01" min="1" max="10000" placeholder="The product price" id="addConsoleProductPrice" name="consoleProductPriceToAdd" th:field="*{product.price}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Quantity-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleProductQty">Product Quantity</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="number" min="1" max="9223372036854775807" placeholder="The product quantity" id="addConsoleProductQty" name="consoleProductQtyToAdd" th:field="*{product.quantity}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Description-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleProductDesc">Product Description</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="10" maxlength="1000" placeholder="The product description" id="addConsoleProductDesc" name="consoleProductDescToAdd" th:field="*{product.description}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console Edition-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleEdition">Console Edition</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="20" placeholder="The console edition" id="addConsoleEdition" name="consoleEditionToAdd" th:field="*{edition}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console GPU-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleGPU">Console GPU</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="150" placeholder="The console GPU" id="addConsoleGPU" name="consoleGPUToAdd" th:field="*{GPU}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console CPU-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleCPU">Console CPU</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="110" placeholder="The console CPU" id="addConsoleCPU" name="consoleCPUToAdd" th:field="*{CPU}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console Memory-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleMemory">Console Memory</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="110" placeholder="The console memory" id="addConsoleMemory" name="consoleMemoryToAdd" th:field="*{memory}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console Storage-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleStorage">Console Storage</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="110" placeholder="The console storage" id="addConsoleStorage" name="consoleStorageToAdd" th:field="*{storage}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console Sound-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleSound">Console Sound</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="110" placeholder="The console sound" id="addConsoleSound" name="consoleSoundToAdd" th:field="*{sound}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console OS-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleOS">Console OS</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="110" placeholder="The console OS" id="addConsoleOS" name="consoleOSToAdd" th:field="*{OS}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console Media-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleMedia">Console Media</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="110" placeholder="The console media" id="addConsoleMedia" name="consoleMediaToAdd" th:field="*{media}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Console Color-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addConsoleColor">Console Color</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="50" placeholder="The console color" id="addConsoleColor" name="consoleColorToAdd" th:field="*{color}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> <br>
+                <input type="submit" id="addConsoleSubmit" value="Add Console" />
+            </form> <br>
             <a th:href="@{/admin/add_products}">
                 <input type="submit" value="Go back" />
             </a>
