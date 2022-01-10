@@ -7,4 +7,6 @@ import ro.unibuc.egv.finalProject.models.Accessory;
 @Repository
 public interface AccessoryRepository extends JpaRepository <Accessory, Long> {
 
+    Accessory findAccessoryByAccessoryID(Long id);
+
 }

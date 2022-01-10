@@ -14,7 +14,7 @@ public class Game{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
-    private Product gameProduct;
+    private Product product;
 
     @Column(name = "platform", nullable = false)
     private String platform;
@@ -34,8 +34,9 @@ public class Game{
     @Column(name = "developer", nullable = false)
     private String developer;
 
-    public Game(Long gameID, String platform, String edition, String genre, String gameMode, String publisher, String developer) {
+    public Game(Long gameID, Product product, String platform, String edition, String genre, String gameMode, String publisher, String developer) {
         this.gameID = gameID;
+        this.product = product;
         this.platform = platform;
         this.edition = edition;
         this.genre = genre;
@@ -54,6 +55,14 @@ public class Game{
 
     public void setGameID(Long gameID) {
         this.gameID = gameID;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getPlatform() {
@@ -109,19 +118,19 @@ public class Game{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Game game = (Game) o;
-        return Objects.equals(gameID, game.gameID) && Objects.equals(gameProduct, game.gameProduct) && Objects.equals(platform, game.platform) && Objects.equals(edition, game.edition) && Objects.equals(genre, game.genre) && Objects.equals(gameMode, game.gameMode) && Objects.equals(publisher, game.publisher) && Objects.equals(developer, game.developer);
+        return Objects.equals(gameID, game.gameID) && Objects.equals(product, game.product) && Objects.equals(platform, game.platform) && Objects.equals(edition, game.edition) && Objects.equals(genre, game.genre) && Objects.equals(gameMode, game.gameMode) && Objects.equals(publisher, game.publisher) && Objects.equals(developer, game.developer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameID, gameProduct, platform, edition, genre, gameMode, publisher, developer);
+        return Objects.hash(gameID, product, platform, edition, genre, gameMode, publisher, developer);
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "gameID = " + gameID + ", " +
-                "gameProduct = " + gameProduct + ", " +
+                "product = " + product + ", " +
                 "platform = " + platform + ", " +
                 "edition = " + edition + ", " +
                 "genre = " + genre + ", " +

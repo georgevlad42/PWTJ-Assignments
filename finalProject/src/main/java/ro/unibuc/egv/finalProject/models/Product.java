@@ -27,13 +27,13 @@ public class Product {
     @Column(name = "product_status", nullable = false)
     private String status;
 
-    @OneToOne(mappedBy = "consoleProduct")
+    @OneToOne(mappedBy = "product")
     private Console console;
 
-    @OneToOne(mappedBy = "gameProduct")
+    @OneToOne(mappedBy = "product")
     private Game game;
 
-    @OneToOne(mappedBy = "accessoryProduct")
+    @OneToOne(mappedBy = "product")
     private Accessory accessory;
 
     public Product(Long productID, String name, Double price, Integer quantity, String description, String status) {

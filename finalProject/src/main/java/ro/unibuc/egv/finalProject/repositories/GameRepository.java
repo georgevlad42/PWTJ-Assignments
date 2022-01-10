@@ -7,4 +7,6 @@ import ro.unibuc.egv.finalProject.models.Game;
 @Repository
 public interface GameRepository extends JpaRepository <Game, Long> {
 
+    Game findGameByGameID(Long id);
+
 }

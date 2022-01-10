@@ -4,13 +4,75 @@
         <meta charset="UTF-8">
         <title>PSM - Consoles</title>
     </head>
-    <body>
+    <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Consoles - WIP</h2> <br>
+        <h2 style="text-align:center;">Consoles</h2> <br>
+        <div id="contentConsoles" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Edition</th>
+                            <th>GPU</th>
+                            <th>CPU</th>
+                            <th>Memory</th>
+                            <th>Storage</th>
+                            <th>Sound</th>
+                            <th>OS</th>
+                            <th>Media</th>
+                            <th>Color</th>
+                            <th>Status</th>
+                            <th>Price (USD)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="console: ${consolesList}">
+                            <td th:text="${console.product.name}"></td>
+                            <td th:text="${console.product.description}"></td>
+                            <td th:text="${console.edition}"></td>
+                            <td th:text="${console.GPU}"></td>
+                            <td th:text="${console.CPU}"></td>
+                            <td th:text="${console.memory}"></td>
+                            <td th:text="${console.storage}"></td>
+                            <td th:text="${console.sound}"></td>
+                            <td th:text="${console.OS}"></td>
+                            <td th:text="${console.media}"></td>
+                            <td th:text="${console.color}"></td>
+                            <td th:text="${console.product.status}"></td>
+                            <td th:text="${console.product.price}"></td>
+                            <form method="post" th:action="@{/store/consoles}">
+                                <td>
+                                    <input type="hidden" name="consoleToBuyID" th:value="${console.consoleID}"/>
+                                    <input type="submit" value="Buy now"/>
+                                </td>
+                            </form>
+                        </tr>
+                    </tbody>
+                </table> <br>
+        </div>
+        <div id="noContentConsoles" style="text-align:center;">
+            <h3 style="text-align:center;">There are no consoles listed at the moment!</h3>
+        </div>
+        <h3 style="text-align: center; color: green;" th:if="${successBuyConsole}" th:text="${successBuyConsole}"></h3>
+        <h3 style="text-align: center; color: green;" th:if="${checkMail}" th:text="${checkMail}"></h3>
+        <h3 style="text-align: center; color: red;" th:if="${errorBuyConsole}" th:text="${errorBuyConsole}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/store}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(consolesList)}]]) {
+                    document.getElementById('contentConsoles').style.display = "block";
+                    document.getElementById('noContentConsoles').style.display = "none";
+                } else {
+                    document.getElementById('contentConsoles').style.display = "none";
+                    document.getElementById('noContentConsoles').style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>

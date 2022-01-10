@@ -4,13 +4,69 @@
         <meta charset="UTF-8">
         <title>PSM - Games</title>
     </head>
-    <body>
+    <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Games - WIP</h2> <br>
+        <h2 style="text-align:center;">Games</h2> <br>
+        <div id="contentGames" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Platform</th>
+                    <th>Edition</th>
+                    <th>Genre</th>
+                    <th>Game Mode</th>
+                    <th>Publisher</th>
+                    <th>Developer</th>
+                    <th>Status</th>
+                    <th>Price (USD)</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="game: ${gamesList}">
+                    <td th:text="${game.product.name}"></td>
+                    <td th:text="${game.product.description}"></td>
+                    <td th:text="${game.platform}"></td>
+                    <td th:text="${game.edition}"></td>
+                    <td th:text="${game.genre}"></td>
+                    <td th:text="${game.gameMode}"></td>
+                    <td th:text="${game.publisher}"></td>
+                    <td th:text="${game.developer}"></td>
+                    <td th:text="${game.product.status}"></td>
+                    <td th:text="${game.product.price}"></td>
+                    <form method="post" th:action="@{/store/games}">
+                        <td>
+                            <input type="hidden" name="gameToBuyID" th:value="${game.gameID}"/>
+                            <input type="submit" value="Buy now"/>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table> <br>
+        </div>
+        <div id="noContentGames" style="text-align:center;">
+            <h3 style="text-align:center;">There are no games listed at the moment!</h3>
+        </div>
+        <h3 style="text-align: center; color: green;" th:if="${successBuyGame}" th:text="${successBuyGame}"></h3>
+        <h3 style="text-align: center; color: green;" th:if="${checkMail}" th:text="${checkMail}"></h3>
+        <h3 style="text-align: center; color: red;" th:if="${errorBuyGame}" th:text="${errorBuyGame}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/store}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(gamesList)}]]) {
+                    document.getElementById('contentGames').style.display = "block";
+                    document.getElementById('noContentGames').style.display = "none";
+                } else {
+                    document.getElementById('contentGames').style.display = "none";
+                    document.getElementById('noContentGames').style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>

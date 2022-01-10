@@ -14,7 +14,7 @@ public class Console{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
-    private Product consoleProduct;
+    private Product product;
 
     @Column(name = "edition", nullable = false)
     private String edition;
@@ -43,8 +43,9 @@ public class Console{
     @Column(name = "color", nullable = false)
     private String color;
 
-    public Console(Long consoleID, String edition, String GPU, String CPU, String memory, String storage, String sound, String OS, String media, String color) {
+    public Console(Long consoleID, Product product, String edition, String GPU, String CPU, String memory, String storage, String sound, String OS, String media, String color) {
         this.consoleID = consoleID;
+        this.product = product;
         this.edition = edition;
         this.GPU = GPU;
         this.CPU = CPU;
@@ -66,6 +67,14 @@ public class Console{
 
     public void setConsoleID(Long consoleID) {
         this.consoleID = consoleID;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getEdition() {
@@ -145,19 +154,19 @@ public class Console{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Console console = (Console) o;
-        return Objects.equals(consoleID, console.consoleID) && Objects.equals(consoleProduct, console.consoleProduct) && Objects.equals(edition, console.edition) && Objects.equals(GPU, console.GPU) && Objects.equals(CPU, console.CPU) && Objects.equals(memory, console.memory) && Objects.equals(storage, console.storage) && Objects.equals(sound, console.sound) && Objects.equals(OS, console.OS) && Objects.equals(media, console.media) && Objects.equals(color, console.color);
+        return Objects.equals(consoleID, console.consoleID) && Objects.equals(product, console.product) && Objects.equals(edition, console.edition) && Objects.equals(GPU, console.GPU) && Objects.equals(CPU, console.CPU) && Objects.equals(memory, console.memory) && Objects.equals(storage, console.storage) && Objects.equals(sound, console.sound) && Objects.equals(OS, console.OS) && Objects.equals(media, console.media) && Objects.equals(color, console.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(consoleID, consoleProduct, edition, GPU, CPU, memory, storage, sound, OS, media, color);
+        return Objects.hash(consoleID, product, edition, GPU, CPU, memory, storage, sound, OS, media, color);
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "consoleID = " + consoleID + ", " +
-                "consoleProduct = " + consoleProduct + ", " +
+                "product = " + product + ", " +
                 "edition = " + edition + ", " +
                 "GPU = " + GPU + ", " +
                 "CPU = " + CPU + ", " +

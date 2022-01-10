@@ -23,7 +23,8 @@ create table if not exists users(
     userpass varchar(50) not null,
     email varchar(255) not null,
     phone_nr varchar(10) not null,
-    address_id bigint null,
+    address_id bigint not null,
+    unique (address_id),
     unique (username),
     unique (email),
     unique (phone_nr),
@@ -37,7 +38,7 @@ create table if not exists products(
     product_name varchar(50) not null,
     price decimal(10, 2) not null,
     quantity int not null,
-    product_desc varchar(1000) null,
+    product_desc varchar(1000) not null,
     product_status varchar(20) not null,
     unique (product_name)
 );
@@ -54,6 +55,7 @@ create table if not exists consoles(
     spec_os varchar(110) not null,
     spec_media varchar(110) not null,
     color varchar(50) not null,
+    unique (product_id),
     foreign key (product_id) references products (id)
     on update cascade
     on delete cascade
@@ -68,6 +70,7 @@ create table if not exists games(
     game_mode varchar(100) not null,
     publisher varchar(100) not null,
     developer varchar(100) not null,
+    unique (product_id),
     foreign key (product_id) references products (id)
     on update cascade
     on delete cascade
@@ -80,19 +83,16 @@ create table if not exists accessories(
     brand varchar(50) not null,
     compatibility varchar(50) not null,
     color varchar(50) not null,
+    unique (product_id),
     foreign key (product_id) references products (id)
     on update cascade
     on delete cascade
 );
 
-insert into users (first_name, last_name, username, userpass, email, phone_nr)
-select 'George-Vlad', 'Ene', 'adminPSM', 'adminPSM', 'admin@psm.com', '0123456789' from dual
-where not exists (select * from users);
-
 insert into addresses (country, district, city, street, nr, postal_code)
 select 'Romania', 'Prahova', 'Ploiesti', 'Strada Mare', 1, '100420' from dual
 where not exists (select * from addresses);
 
-update users
-set address_id = if (address_id is null, 1, address_id)
-where username = 'admin';
+insert into users (first_name, last_name, username, userpass, email, phone_nr, address_id)
+select 'George-Vlad', 'Ene', 'adminPSM', 'adminPSM', 'admin@psm.com', '0123456789', 1 from dual
+where not exists (select * from users);

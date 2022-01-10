@@ -7,4 +7,6 @@ import ro.unibuc.egv.finalProject.models.Console;
 @Repository
 public interface ConsoleRepository extends JpaRepository <Console, Long> {
 
+    Console findConsoleByConsoleID(Long id);
+
 }

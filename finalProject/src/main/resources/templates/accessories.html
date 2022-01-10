@@ -4,13 +4,65 @@
         <meta charset="UTF-8">
         <title>PSM - Accessories</title>
     </head>
-    <body>
+    <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Accessories - WIP</h2> <br>
+        <h2 style="text-align:center;">Accessories</h2> <br>
+        <div id="contentAccessories" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Brand</th>
+                    <th>Compatibility</th>
+                    <th>Color</th>
+                    <th>Status</th>
+                    <th>Price (USD)</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="accessory: ${accessoriesList}">
+                    <td th:text="${accessory.product.name}"></td>
+                    <td th:text="${accessory.product.description}"></td>
+                    <td th:text="${accessory.type}"></td>
+                    <td th:text="${accessory.brand}"></td>
+                    <td th:text="${accessory.compatibility}"></td>
+                    <td th:text="${accessory.color}"></td>
+                    <td th:text="${accessory.product.status}"></td>
+                    <td th:text="${accessory.product.price}"></td>
+                    <form method="post" th:action="@{/store/accessories}">
+                        <td>
+                            <input type="hidden" name="accessoryToBuyID" th:value="${accessory.accessoryID}"/>
+                            <input type="submit" value="Buy now"/>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table> <br>
+        </div>
+        <div id="noContentAccessories" style="text-align:center;">
+            <h3 style="text-align:center;">There are no accessories listed at the moment!</h3>
+        </div>
+        <h3 style="text-align: center; color: green;" th:if="${successBuyAccessory}" th:text="${successBuyAccessory}"></h3>
+        <h3 style="text-align: center; color: green;" th:if="${checkMail}" th:text="${checkMail}"></h3>
+        <h3 style="text-align: center; color: red;" th:if="${errorBuyAccessory}" th:text="${errorBuyAccessory}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/store}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(accessoriesList)}]]) {
+                    document.getElementById('contentAccessories').style.display = "block";
+                    document.getElementById('noContentAccessories').style.display = "none";
+                } else {
+                    document.getElementById('contentAccessories').style.display = "none";
+                    document.getElementById('noContentAccessories').style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>
