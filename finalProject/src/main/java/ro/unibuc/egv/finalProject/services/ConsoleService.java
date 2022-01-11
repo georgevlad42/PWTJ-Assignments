@@ -31,4 +31,13 @@ public class ConsoleService {
         console.getProduct().setStatus("Available");
         consoleRepository.save(console);
     }
+
+    public void editConsole(Console console){
+        if (console.getProduct().getQuantity() > 0) {
+            console.getProduct().setStatus("Available");
+        } else {
+            console.getProduct().setStatus("Unavailable");
+        }
+        consoleRepository.save(console);
+    }
 }

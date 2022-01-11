@@ -4,13 +4,102 @@
         <meta charset="UTF-8">
         <title>PSM - Edit Consoles</title>
     </head>
-    <body>
+    <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Edit Consoles - WIP</h2> <br>
+        <h2 style="text-align:center;">Edit Consoles</h2> <br>
+        <div id="contentEditConsoles" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price (USD)</th>
+                            <th>Quantity</th>
+                            <th>Description</th>
+                            <th>Edition</th>
+                            <th>GPU</th>
+                            <th>CPU</th>
+                            <th>Memory</th>
+                            <th>Storage</th>
+                            <th>Sound</th>
+                            <th>OS</th>
+                            <th>Media</th>
+                            <th>Color</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    <form method="post" th:action="@{/admin/edit_products/edit_consoles}">
+                        <tr th:each="console: ${consolesList}">
+                            <td>
+                                <input type="text" minlength="3" maxlength="50" placeholder="The product name" id="editConsoleProductName" name="consoleProductNameToEdit" th:value="${console.product.name}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="number" step="0.01" min="1" max="10000" placeholder="The product price" id="editConsoleProductPrice" name="consoleProductPriceToEdit" th:value="${console.product.price}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="number" min="1" max="9223372036854775807" placeholder="The product quantity" id="editConsoleProductQty" name="consoleProductQtyToEdit" th:value="${console.product.quantity}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="10" maxlength="1000" placeholder="The product description" id="editConsoleProductDesc" name="consoleProductDescToEdit" th:value="${console.product.description}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="20" placeholder="The console edition" id="editConsoleEdition" name="consoleEditionToEdit" th:value="${console.edition}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="150" placeholder="The console GPU" id="editConsoleGPU" name="consoleGPUToEdit" th:value="${console.GPU}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="110" placeholder="The console CPU" id="editConsoleCPU" name="consoleCPUToEdit" th:value="${console.CPU}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="110" placeholder="The console memory" id="editConsoleMemory" name="consoleMemoryToEdit" th:value="${console.memory}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="110" placeholder="The console storage" id="editConsoleStorage" name="consoleStorageToEdit" th:value="${console.storage}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="110" placeholder="The console sound" id="editConsoleSound" name="consoleSoundToEdit" th:value="${console.sound}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="110" placeholder="The console OS" id="editConsoleOS" name="consoleOSToEdit" th:value="${console.OS}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="110" placeholder="The console media" id="editConsoleMedia" name="consoleMediaToEdit" th:value="${console.media}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="text" minlength="5" maxlength="50" placeholder="The console color" id="editConsoleColor" name="consoleColorToEdit" th:value="${console.color}" required="required"/>
+                            </td>
+                            <td>
+                                <input type="hidden" name="consoleToEditID" th:value="${console.consoleID}"/>
+                                <input type="hidden" name="consoleToEditProductID" th:value="${console.product.productID}"/>
+                                <input type="submit" value="Update console"/>
+                            </td>
+                        </tr>
+                    </form>
+                </tbody>
+            </table> <br>
+        </div>
+        <div id="noContentEditConsoles" style="text-align:center;">
+            <h3 style="text-align:center;">There are no consoles available to edit!</h3>
+        </div>
+        <h3 style="text-align: center; color: green;" th:if="${successEditConsole}" th:text="${successEditConsole}"></h3>
+        <h3 style="text-align: center; color: red;" th:if="${errorEditProductName}" th:text="${errorEditProductName}"></h3>
+        <h3 style="text-align: center; color: red;" th:if="${errorEditConsole}" th:text="${errorEditConsole}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/admin/edit_products}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(consolesList)}]]) {
+                    document.getElementById('contentEditConsoles').style.display = "block";
+                    document.getElementById('noContentEditConsoles').style.display = "none";
+                } else {
+                    document.getElementById('contentEditConsoles').style.display = "none";
+                    document.getElementById('noContentEditConsoles').style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>

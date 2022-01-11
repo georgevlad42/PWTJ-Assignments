@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ro.unibuc.egv.finalProject.models.Console;
+import ro.unibuc.egv.finalProject.models.Product;
 import ro.unibuc.egv.finalProject.services.ConsoleService;
 import ro.unibuc.egv.finalProject.services.ProductService;
 
@@ -71,9 +72,36 @@ public class ConsoleController {
 
     //region Edit Consoles page
     @RequestMapping("/admin/edit_products/edit_consoles")
-    public String editConsolesInit(){
+    @GetMapping("/admin/edit_products/edit_consoles")
+    public String editConsolesInit(Model model){
         System.out.println("Edit consoles page accessed!");
+        model.addAttribute("consolesList", consoleService.getConsoles());
         return "edit_consoles";
+    }
+
+    @PostMapping("/admin/edit_products/edit_consoles")
+    public String editConsole(@RequestParam("consoleToEditID") Long id, @RequestParam("consoleToEditProductID") Long productID,
+                              @RequestParam("consoleProductNameToEdit") String name, @RequestParam("consoleProductPriceToEdit") Double price,
+                              @RequestParam("consoleProductQtyToEdit") Integer quantity, @RequestParam("consoleProductDescToEdit") String description,
+                              @RequestParam("consoleEditionToEdit") String edition, @RequestParam("consoleGPUToEdit") String GPU,
+                              @RequestParam("consoleCPUToEdit") String CPU, @RequestParam("consoleMemoryToEdit") String memory,
+                              @RequestParam("consoleStorageToEdit") String storage, @RequestParam("consoleSoundToEdit") String sound,
+                              @RequestParam("consoleOSToEdit") String OS, @RequestParam("consoleMediaToEdit") String media,
+                              @RequestParam("consoleColorToEdit") String color, Model model, RedirectAttributes redirectAttributes){
+        Console consoleToEdit = new Console(id, new Product(productID, name, price, quantity, description, consoleService.getConsoleByID(id).getProduct().getStatus()), edition, GPU, CPU, memory, storage, sound, OS, media, color);
+        if (consoleToEdit.equals(consoleService.getConsoleByID(consoleToEdit.getConsoleID()))) {
+            model.addAttribute("errorEditConsole", "There are no changes made to the selected console!");
+            model.addAttribute("consolesList", consoleService.getConsoles());
+            return "edit_consoles";
+        }
+        if (!productService.isProductNameUnique(consoleToEdit.getProduct().getName()) && !consoleToEdit.getProduct().getName().equals(consoleService.getConsoleByID(id).getProduct().getName())) {
+            model.addAttribute("errorEditProductName", "The product name " + consoleToEdit.getProduct().getName() + " is already in use!");
+            model.addAttribute("consolesList", consoleService.getConsoles());
+            return "edit_consoles";
+        }
+        consoleService.editConsole(consoleToEdit);
+        redirectAttributes.addFlashAttribute("successEditConsole", "The console has been updated successfully!");
+        return "redirect:/admin/edit_products/edit_consoles";
     }
     //endregion
 
