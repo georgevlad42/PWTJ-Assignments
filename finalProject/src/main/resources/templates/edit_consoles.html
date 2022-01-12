@@ -10,26 +10,26 @@
         <div id="contentEditConsoles" style="text-align:center;">
             <table style="margin-left:auto; margin-right:auto;">
                 <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price (USD)</th>
-                            <th>Quantity</th>
-                            <th>Description</th>
-                            <th>Edition</th>
-                            <th>GPU</th>
-                            <th>CPU</th>
-                            <th>Memory</th>
-                            <th>Storage</th>
-                            <th>Sound</th>
-                            <th>OS</th>
-                            <th>Media</th>
-                            <th>Color</th>
-                            <th></th>
-                        </tr>
-                    </thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price (USD)</th>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                        <th>Edition</th>
+                        <th>GPU</th>
+                        <th>CPU</th>
+                        <th>Memory</th>
+                        <th>Storage</th>
+                        <th>Sound</th>
+                        <th>OS</th>
+                        <th>Media</th>
+                        <th>Color</th>
+                        <th></th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <form method="post" th:action="@{/admin/edit_products/edit_consoles}">
-                        <tr th:each="console: ${consolesList}">
+                    <tr th:each="console: ${consolesList}">
+                        <form method="post" th:action="@{/admin/edit_products/edit_consoles}">
                             <td>
                                 <input type="text" minlength="3" maxlength="50" placeholder="The product name" id="editConsoleProductName" name="consoleProductNameToEdit" th:value="${console.product.name}" required="required"/>
                             </td>
@@ -74,8 +74,8 @@
                                 <input type="hidden" name="consoleToEditProductID" th:value="${console.product.productID}"/>
                                 <input type="submit" value="Update console"/>
                             </td>
-                        </tr>
-                    </form>
+                        </form>
+                    </tr>
                 </tbody>
             </table> <br>
         </div>

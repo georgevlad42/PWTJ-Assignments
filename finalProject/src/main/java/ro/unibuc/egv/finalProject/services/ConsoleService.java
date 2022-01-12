@@ -40,4 +40,8 @@ public class ConsoleService {
         }
         consoleRepository.save(console);
     }
+
+    public void deleteConsole(Long id){
+        consoleRepository.deleteById(id);
+    }
 }

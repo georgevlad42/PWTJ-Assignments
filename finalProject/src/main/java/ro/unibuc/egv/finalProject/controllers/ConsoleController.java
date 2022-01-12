@@ -107,9 +107,18 @@ public class ConsoleController {
 
     //region Delete Consoles page
     @RequestMapping("/admin/delete_products/delete_consoles")
-    public String deleteConsolesInit(){
+    @GetMapping("/admin/delete_products/delete_consoles")
+    public String deleteConsolesInit(Model model){
         System.out.println("Delete consoles page accessed!");
+        model.addAttribute("consolesList", consoleService.getConsoles());
         return "delete_consoles";
+    }
+
+    @PostMapping("/admin/delete_products/delete_consoles")
+    public String deleteConsole(@RequestParam("consoleToDeleteID") Long id, RedirectAttributes redirectAttributes){
+        consoleService.deleteConsole(id);
+        redirectAttributes.addFlashAttribute("successDeleteConsole", "Console was deleted successfully");
+        return "redirect:/admin/delete_products/delete_consoles";
     }
     //endregion
 

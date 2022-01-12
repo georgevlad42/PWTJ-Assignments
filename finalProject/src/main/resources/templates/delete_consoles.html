@@ -4,13 +4,73 @@
         <meta charset="UTF-8">
         <title>PSM - Delete Consoles</title>
     </head>
-    <body>
+    <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Delete Consoles - WIP</h2> <br>
+        <h2 style="text-align:center;">Delete Consoles</h2> <br>
+        <div id="contentDeleteConsoles" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price (USD)</th>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                        <th>Edition</th>
+                        <th>GPU</th>
+                        <th>CPU</th>
+                        <th>Memory</th>
+                        <th>Storage</th>
+                        <th>Sound</th>
+                        <th>OS</th>
+                        <th>Media</th>
+                        <th>Color</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="console: ${consolesList}">
+                        <td th:text="${console.product.name}"></td>
+                        <td th:text="${console.product.price}"></td>
+                        <td th:text="${console.product.quantity}"></td>
+                        <td th:text="${console.product.description}"></td>
+                        <td th:text="${console.edition}"></td>
+                        <td th:text="${console.GPU}"></td>
+                        <td th:text="${console.CPU}"></td>
+                        <td th:text="${console.memory}"></td>
+                        <td th:text="${console.storage}"></td>
+                        <td th:text="${console.sound}"></td>
+                        <td th:text="${console.OS}"></td>
+                        <td th:text="${console.media}"></td>
+                        <td th:text="${console.color}"></td>
+                        <form method="post" th:action="@{/admin/delete_products/delete_consoles}">
+                            <td>
+                                <input type="hidden" name="consoleToDeleteID" th:value="${console.consoleID}"/>
+                                <input type="submit" value="Delete console"/>
+                            </td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table> <br>
+        </div>
+        <div id="noContentDeleteConsoles" style="text-align:center;">
+            <h3 style="text-align:center;">There are no consoles left to delete!</h3>
+        </div>
+        <h3 style="text-align: center; color: green;" th:if="${successDeleteConsole}" th:text="${successDeleteConsole}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/admin/delete_products}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(consolesList)}]]) {
+                    document.getElementById('contentDeleteConsoles').style.display = "block";
+                    document.getElementById('noContentDeleteConsoles').style.display = "none";
+                } else {
+                    document.getElementById('contentDeleteConsoles').style.display = "none";
+                    document.getElementById('noContentDeleteConsoles').style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>
