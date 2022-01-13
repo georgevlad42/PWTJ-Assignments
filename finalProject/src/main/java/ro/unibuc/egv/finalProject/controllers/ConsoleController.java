@@ -45,7 +45,7 @@ public class ConsoleController {
         if (console.getProduct().getQuantity() == 0) {
             console.getProduct().setStatus("Unavailable");
         }
-        consoleService.updateConsoleQuantity(console);
+        consoleService.updateConsoleStatus(console);
         redirectAttributes.addFlashAttribute("successBuyConsole", console.getProduct().getName() + " has been bought successfully!");
         redirectAttributes.addFlashAttribute("checkMail", "Check your email for more details!");
         MailSenderPSM mailSenderPSM = new MailSenderPSM((User) httpSession.getAttribute("currentUser"), console.getProduct(), "PSM - Console Purchase");

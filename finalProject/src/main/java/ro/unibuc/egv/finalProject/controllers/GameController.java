@@ -45,7 +45,7 @@ public class GameController {
         if (game.getProduct().getQuantity() == 0) {
             game.getProduct().setStatus("Unavailable");
         }
-        gameService.updateGameQuantity(game);
+        gameService.updateGameStatus(game);
         redirectAttributes.addFlashAttribute("successBuyGame", game.getProduct().getName() + " has been bought successfully!");
         redirectAttributes.addFlashAttribute("checkMail", "Check your email for more details!");
         MailSenderPSM mailSenderPSM = new MailSenderPSM((User) httpSession.getAttribute("currentUser"), game.getProduct(), "PSM - Game Purchase");

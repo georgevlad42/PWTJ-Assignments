@@ -45,7 +45,7 @@ public class AccessoryController {
         if (accessory.getProduct().getQuantity() == 0) {
             accessory.getProduct().setStatus("Unavailable");
         }
-        accessoryService.updateAccessoryQuantity(accessory);
+        accessoryService.updateAccessoryStatus(accessory);
         redirectAttributes.addFlashAttribute("successBuyAccessory", accessory.getProduct().getName() + " has been bought successfully!");
         redirectAttributes.addFlashAttribute("checkMail", "Check your email for more details!");
         MailSenderPSM mailSenderPSM = new MailSenderPSM((User) httpSession.getAttribute("currentUser"), accessory.getProduct(), "PSM - Accessory Purchase");

@@ -25,8 +25,8 @@ public class ConsoleService {
     }
     //endregion
 
-    //region Quantity Update
-    public void updateConsoleQuantity(Console console){
+    //region Status Update
+    public void updateConsoleStatus(Console console){
         consoleRepository.save(console);
     }
     //endregion

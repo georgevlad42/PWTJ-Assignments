@@ -25,8 +25,8 @@ public class GameService {
     }
     //endregion
 
-    //region Quantity Update
-    public void updateGameQuantity(Game game){
+    //region Status Update
+    public void updateGameStatus(Game game){
         gameRepository.save(game);
     }
     //endregion

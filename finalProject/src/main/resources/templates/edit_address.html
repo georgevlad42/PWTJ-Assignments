@@ -24,7 +24,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="4" maxlength="50" placeholder="Your country" id="editCountry" name="countryToEdit" th:field="*{country}" required="required"/>
+                                            <input style="width: 300px;" type="text" minlength="4" maxlength="50" placeholder="Your country" id="editCountry" name="countryToEdit" th:field="*{country}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -41,7 +41,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="4" maxlength="50" placeholder="Your district" id="editDistrict" name="districtToEdit" th:field="*{district}" required="required"/>
+                                            <input style="width: 300px;" type="text" minlength="4" maxlength="50" placeholder="Your district" id="editDistrict" name="districtToEdit" th:field="*{district}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -58,7 +58,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="1" maxlength="50" placeholder="Your city" id="editCity" name="cityToEdit" th:field="*{city}" required="required"/>
+                                            <input style="width: 300px;" type="text" minlength="1" maxlength="50" placeholder="Your city" id="editCity" name="cityToEdit" th:field="*{city}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -75,7 +75,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="4" maxlength="50" placeholder="Your street" id="editStreet" name="streetToEdit" th:field="*{street}" required="required"/>
+                                            <input style="width: 300px;" type="text" minlength="4" maxlength="50" placeholder="Your street" id="editStreet" name="streetToEdit" th:field="*{street}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -92,7 +92,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your street number" id="editNumber" name="numberToEdit" th:field="*{number}" required="required"/>
+                                            <input style="width: 300px;" pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your street number" id="editNumber" name="numberToEdit" th:field="*{number}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -109,7 +109,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="1" maxlength="10" placeholder="Your building" id="editBuilding" name="buildingToEdit" th:field="*{building}"/>
+                                            <input style="width: 300px;" type="text" minlength="1" maxlength="10" placeholder="Your building" id="editBuilding" name="buildingToEdit" th:field="*{building}"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -126,7 +126,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="1" maxlength="10" placeholder="Your entrance" id="editEntrance" name="entranceToEdit" th:field="*{entrance}"/>
+                                            <input style="width: 300px;" type="text" minlength="1" maxlength="10" placeholder="Your entrance" id="editEntrance" name="entranceToEdit" th:field="*{entrance}"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -143,7 +143,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your floor number" id="editFloor" name="floorToEdit" th:field="*{floor}"/>
+                                            <input style="width: 300px;" pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your floor number" id="editFloor" name="floorToEdit" th:field="*{floor}"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -160,7 +160,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your apartment number" id="editApartment" name="apartmentToEdit" th:field="*{apartment}"/>
+                                            <input style="width: 300px;" pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your apartment number" id="editApartment" name="apartmentToEdit" th:field="*{apartment}"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -177,7 +177,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="1" maxlength="10" placeholder="Your interphone code" id="editInterphone" name="interphoneToEdit" th:field="*{interphone}"/>
+                                            <input style="width: 300px;" type="text" minlength="1" maxlength="10" placeholder="Your interphone code" id="editInterphone" name="interphoneToEdit" th:field="*{interphone}"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -194,7 +194,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="4" maxlength="10" placeholder="Your postal code" id="editPostalCode" name="postalCodeToEdit" th:field="*{postalCode}" required="required"/>
+                                            <input style="width: 300px;" type="text" minlength="4" maxlength="10" placeholder="Your postal code" id="editPostalCode" name="postalCodeToEdit" th:field="*{postalCode}" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -202,10 +202,10 @@
                         </tr>
                     </tbody>
                 </table> <br>
-                <input type="submit" id="editAddressSubmit" value="Update address details" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" id="editAddressSubmit" value="Update Address Details" />
             </form> <br>
             <a th:href="@{/settings}">
-                <input type="submit" value="Go back" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" value="Return" />
             </a>
         </div>
     </body>

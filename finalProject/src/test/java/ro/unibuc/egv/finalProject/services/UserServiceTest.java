@@ -92,41 +92,13 @@ public class UserServiceTest {
 
         // Assert
         assertNotNull(result1);
-        assertEquals(savedUser.getUserID(), result1.getUserID());
-        assertEquals(savedUser.getFirstName(), result1.getFirstName());
-        assertEquals(savedUser.getLastName(), result1.getLastName());
-        assertEquals(savedUser.getUsername(), result1.getUsername());
-        assertEquals(savedUser.getPassword(), result1.getPassword());
-        assertEquals(savedUser.getEmail(), result1.getEmail());
-        assertEquals(savedUser.getPhoneNr(), result1.getPhoneNr());
-        assertEquals(savedUser.getAddress(), result1.getAddress());
+        assertEquals(savedUser, result1);
         assertNotNull(result2);
-        assertEquals(savedUser.getUserID(), result2.getUserID());
-        assertEquals(savedUser.getFirstName(), result2.getFirstName());
-        assertEquals(savedUser.getLastName(), result2.getLastName());
-        assertEquals(savedUser.getUsername(), result2.getUsername());
-        assertEquals(savedUser.getPassword(), result2.getPassword());
-        assertEquals(savedUser.getEmail(), result2.getEmail());
-        assertEquals(savedUser.getPhoneNr(), result2.getPhoneNr());
-        assertEquals(savedUser.getAddress(), result2.getAddress());
+        assertEquals(savedUser, result2);
         assertNotNull(result3);
-        assertEquals(savedUser.getUserID(), result3.getUserID());
-        assertEquals(savedUser.getFirstName(), result3.getFirstName());
-        assertEquals(savedUser.getLastName(), result3.getLastName());
-        assertEquals(savedUser.getUsername(), result3.getUsername());
-        assertEquals(savedUser.getPassword(), result3.getPassword());
-        assertEquals(savedUser.getEmail(), result3.getEmail());
-        assertEquals(savedUser.getPhoneNr(), result3.getPhoneNr());
-        assertEquals(savedUser.getAddress(), result3.getAddress());
+        assertEquals(savedUser, result3);
         assertNotNull(result4);
-        assertEquals(savedUser.getUserID(), result4.getUserID());
-        assertEquals(savedUser.getFirstName(), result4.getFirstName());
-        assertEquals(savedUser.getLastName(), result4.getLastName());
-        assertEquals(savedUser.getUsername(), result4.getUsername());
-        assertEquals(savedUser.getPassword(), result4.getPassword());
-        assertEquals(savedUser.getEmail(), result4.getEmail());
-        assertEquals(savedUser.getPhoneNr(), result4.getPhoneNr());
-        assertEquals(savedUser.getAddress(), result4.getAddress());
+        assertEquals(savedUser, result4);
     }
 
     @Test
@@ -204,14 +176,7 @@ public class UserServiceTest {
 
         // Assert
         assertNotNull(result);
-        assertEquals(updatedUser.getUserID(), result.getUserID());
-        assertEquals(updatedUser.getFirstName(), result.getFirstName());
-        assertEquals(updatedUser.getLastName(), result.getLastName());
-        assertEquals(updatedUser.getUsername(), result.getUsername());
-        assertEquals(updatedUser.getPassword(), result.getPassword());
-        assertEquals(updatedUser.getEmail(), result.getEmail());
-        assertEquals(updatedUser.getPhoneNr(), result.getPhoneNr());
-        assertEquals(updatedUser.getAddress(), result.getAddress());
+        assertEquals(updatedUser, result);
     }
 
     @Test

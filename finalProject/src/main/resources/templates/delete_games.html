@@ -4,11 +4,16 @@
         <meta charset="UTF-8">
         <title>PSM - Delete Games</title>
     </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
     <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
         <h2 style="text-align:center;">Delete Games</h2> <br>
         <div id="contentDeleteGames" style="text-align:center;">
-            <table style="margin-left:auto; margin-right:auto;">
+            <table style="margin-left:auto; margin-right:auto; width: 100%;">
                 <thead>
                     <tr>
                         <th>Product Name</th>
@@ -39,7 +44,7 @@
                         <form method="post" th:action="@{/admin/delete_products/delete_games}">
                             <td>
                                 <input type="hidden" name="gameToDeleteID" th:value="${game.gameID}"/>
-                                <input type="submit" value="Delete game"/>
+                                <input type="submit" value="Delete Game"/>
                             </td>
                         </form>
                     </tr>
@@ -52,7 +57,7 @@
         <h3 style="text-align: center; color: green;" th:if="${successDeleteGame}" th:text="${successDeleteGame}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/admin/delete_products}">
-                <input type="submit" value="Go back" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" value="Return" />
             </a>
         </div>
         <script th:inline="javascript">

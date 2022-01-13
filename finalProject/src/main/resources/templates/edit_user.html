@@ -29,7 +29,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="editFirstName" name="firstNameToEdit" th:field="*{firstName}" th:value="*{firstName}" required="required"/>
+                                        <input style="width: 300px;" pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="editFirstName" name="firstNameToEdit" th:field="*{firstName}" th:value="*{firstName}" required="required"/>
                                     </td>
                                 </tr>
                             </table>
@@ -51,7 +51,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="editLastName" name="lastNameToEdit" th:field="*{lastName}" th:value="*{lastName}" required="required"/>
+                                        <input style="width: 300px;" pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="editLastName" name="lastNameToEdit" th:field="*{lastName}" th:value="*{lastName}" required="required"/>
                                     </td>
                                 </tr>
                             </table>
@@ -73,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="editEmail" name="emailToEdit" th:field="*{email}" th:value="*{email}" required="required"/>
+                                        <input style="width: 300px;" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="editEmail" name="emailToEdit" th:field="*{email}" th:value="*{email}" required="required"/>
                                     </td>
                                 </tr>
                             </table>
@@ -95,7 +95,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="editPhoneNr" name="phoneNrToEdit" th:field="*{phoneNr}" th:value="*{phoneNr}" required="required"/>
+                                        <input style="width: 300px;" pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="editPhoneNr" name="phoneNrToEdit" th:field="*{phoneNr}" th:value="*{phoneNr}" required="required"/>
                                     </td>
                                 </tr>
                             </table>
@@ -112,7 +112,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input style="color: dimgrey;" pattern="^[A-Za-z0-9]{6,}$" maxlength="50" id="editUser" name="userToEdit" th:field="*{username}" th:value="*{username}" readonly="readonly"/>
+                                        <input style="color: dimgrey; width: 300px;" pattern="^[A-Za-z0-9]{6,}$" maxlength="50" id="editUser" name="userToEdit" th:field="*{username}" th:value="*{username}" readonly="readonly"/>
                                     </td>
                                 </tr>
                             </table>
@@ -129,7 +129,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input style="color: dimgrey;" type="password" minlength="6" maxlength="50" id="editCurrentPass" name="currentPassToEdit" th:value="*{password}" readonly="readonly"/>
+                                        <input style="color: dimgrey; width: 300px;" type="password" minlength="6" maxlength="50" id="editCurrentPass" name="currentPassToEdit" th:value="*{password}" readonly="readonly"/>
                                     </td>
                                 </tr>
                             </table>
@@ -151,7 +151,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="password" maxlength="50" placeholder="Type the old password" id="editOldPass" name="oldPassToEdit"/>
+                                        <input style="width: 300px;" type="password" maxlength="50" placeholder="Type the old password" id="editOldPass" name="oldPassToEdit"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -183,7 +183,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="password" maxlength="50" placeholder="Type the new password" id="editNewPass" name="newPassToEdit" th:field="*{password}"/>
+                                        <input style="width: 300px;" type="password" maxlength="50" placeholder="Type the new password" id="editNewPass" name="newPassToEdit" th:field="*{password}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -196,10 +196,10 @@
                     </tr>
                     </tbody>
                 </table> <br>
-                <input type="submit" id="editUserSubmit" value="Update user details" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" id="editUserSubmit" value="Update User Details" />
             </form> <br>
             <a th:href="@{/settings}">
-                <input type="submit" value="Go back" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" value="Return" />
             </a>
         </div>
         <script th:inline="javascript">

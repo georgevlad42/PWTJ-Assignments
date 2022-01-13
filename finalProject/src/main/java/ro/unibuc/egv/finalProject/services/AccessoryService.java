@@ -15,6 +15,7 @@ public class AccessoryService {
         this.accessoryRepository = accessoryRepository;
     }
 
+    //region Getters
     public Accessory getAccessoryByID(Long id) {
         return accessoryRepository.findAccessoryByAccessoryID(id);
     }
@@ -22,16 +23,22 @@ public class AccessoryService {
     public List<Accessory> getAccessories(){
         return accessoryRepository.findAll();
     }
+    //endregion
 
-    public void updateAccessoryQuantity(Accessory accessory){
+    //region Status Update
+    public void updateAccessoryStatus(Accessory accessory){
         accessoryRepository.save(accessory);
     }
+    //endregion
 
+    //region Add Accessory
     public void addAccessory(Accessory accessory){
         accessory.getProduct().setStatus("Available");
         accessoryRepository.save(accessory);
     }
+    //endregion
 
+    //region Edit Accessory
     public void editAccessory(Accessory accessory){
         if (accessory.getProduct().getQuantity() > 0){
             accessory.getProduct().setStatus("Available");
@@ -40,8 +47,11 @@ public class AccessoryService {
         }
         accessoryRepository.save(accessory);
     }
+    //endregion
 
+    //region Delete Accessory
     public void deleteAccessory(Long id){
         accessoryRepository.deleteById(id);
     }
+    //endregion
 }

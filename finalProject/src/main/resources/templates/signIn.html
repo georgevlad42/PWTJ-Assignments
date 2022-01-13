@@ -23,7 +23,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" minlength="6" maxlength="50" placeholder="Your username" id="signInUser" name="userToSignIn" required="required"/>
+                                            <input style="width: 300px;" type="text" minlength="6" maxlength="50" placeholder="Your username" id="signInUser" name="userToSignIn" required="required"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="password" minlength="6" maxlength="50" placeholder="Your password" id="signInPass" name="passToSignIn" required="required"/>
+                                            <input style="width: 300px;" type="password" minlength="6" maxlength="50" placeholder="Your password" id="signInPass" name="passToSignIn" required="required"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -54,10 +54,10 @@
                     </tbody>
                 </table>
                 <h3 style="text-align:center; color: red;" th:if="${signInCheck}" th:text="${signInCheck}"></h3> <br>
-                <input type="submit" value="Sign In" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" value="Sign In" />
             </form> <br>
             <a th:href="@{/}">
-                <input type="submit" value="Go back" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" value="Return" />
             </a>
         </div>
         <script th:inline="javascript">

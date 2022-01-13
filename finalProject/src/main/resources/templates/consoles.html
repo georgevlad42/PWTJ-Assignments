@@ -4,11 +4,16 @@
         <meta charset="UTF-8">
         <title>PSM - Consoles</title>
     </head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
     <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
         <h2 style="text-align:center;">Consoles</h2> <br>
         <div id="contentConsoles" style="text-align:center;">
-            <table style="margin-left:auto; margin-right:auto;">
+            <table style="margin-left:auto; margin-right:auto; width: 100%;">
                 <thead>
                     <tr>
                         <th>Product Name</th>
@@ -45,7 +50,7 @@
                         <form method="post" th:action="@{/store/consoles}">
                             <td>
                                 <input type="hidden" name="consoleToBuyID" th:value="${console.consoleID}"/>
-                                <input type="submit" value="Buy now"/>
+                                <input type="submit" value="Buy Now"/>
                             </td>
                         </form>
                     </tr>
@@ -60,7 +65,7 @@
         <h3 style="text-align: center; color: red;" th:if="${errorBuyConsole}" th:text="${errorBuyConsole}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/store}">
-                <input type="submit" value="Go back" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" value="Return" />
             </a>
         </div>
         <script th:inline="javascript">

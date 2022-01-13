@@ -49,7 +49,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" th:field="*{firstName}" required="required"/>
+                                                            <input style="width: 300px;" pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your first name" id="signUpFirstName" name="firstNameToSignUp" th:field="*{firstName}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -71,7 +71,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" th:field="*{lastName}" required="required"/>
+                                                            <input style="width: 300px;" pattern="^(?!.*^-)(?!.*--)(?!.*-$)[A-Za-z\-]{3,}$" maxlength="30" placeholder="Your last name" id="signUpLastName" name="lastNameToSignUp" th:field="*{lastName}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -93,7 +93,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" th:field="*{email}" required="required"/>
+                                                            <input style="width: 300px;" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="255" placeholder="Your email address" id="signUpEmail" name="emailToSignUp" th:field="*{email}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -115,7 +115,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="signUpPhoneNr" name="phoneNrToSignUp" th:field="*{phoneNr}" required="required"/>
+                                                            <input style="width: 300px;" pattern="[0-9]{10}" maxlength="10" placeholder="Your phone number" id="signUpPhoneNr" name="phoneNrToSignUp" th:field="*{phoneNr}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -142,7 +142,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="^[A-Za-z0-9]{6,}$" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" th:field="*{username}" required="required"/>
+                                                            <input style="width: 300px;" pattern="^[A-Za-z0-9]{6,}$" maxlength="50" placeholder="Your new username" id="signUpUser" name="userToSignUp" th:field="*{username}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -164,7 +164,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="password" minlength="6" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" th:field="*{password}" required="required"/>
+                                                            <input style="width: 300px;" type="password" minlength="6" maxlength="50" placeholder="Your new password" id="signUpPass" name="passToSignUp" th:field="*{password}" required="required"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -186,7 +186,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="password" minlength="6" maxlength="50" placeholder="Repeat the password" id="verifyPass" name="passToVerify" required="required"/>
+                                                            <input style="width: 300px;" type="password" minlength="6" maxlength="50" placeholder="Repeat the password" id="verifyPass" name="passToVerify" required="required"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -215,7 +215,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="4" maxlength="50" placeholder="Your country" id="signUpCountry" name="countryToSignUp" th:field="*{address.country}" required="required"/>
+                                                            <input style="width: 300px;" type="text" minlength="4" maxlength="50" placeholder="Your country" id="signUpCountry" name="countryToSignUp" th:field="*{address.country}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -232,7 +232,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="4" maxlength="50" placeholder="Your district" id="signUpDistrict" name="districtToSignUp" th:field="*{address.district}" required="required"/>
+                                                            <input style="width: 300px;" type="text" minlength="4" maxlength="50" placeholder="Your district" id="signUpDistrict" name="districtToSignUp" th:field="*{address.district}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -249,7 +249,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="1" maxlength="50" placeholder="Your city" id="signUpCity" name="cityToSignUp" th:field="*{address.city}" required="required"/>
+                                                            <input style="width: 300px;" type="text" minlength="1" maxlength="50" placeholder="Your city" id="signUpCity" name="cityToSignUp" th:field="*{address.city}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -266,7 +266,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="4" maxlength="50" placeholder="Your street" id="signUpStreet" name="streetToSignUp" th:field="*{address.street}" required="required"/>
+                                                            <input style="width: 300px;" type="text" minlength="4" maxlength="50" placeholder="Your street" id="signUpStreet" name="streetToSignUp" th:field="*{address.street}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -283,7 +283,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your street number" id="signUpNumber" name="numberToSignUp" th:field="*{address.number}" required="required"/>
+                                                            <input style="width: 300px;" pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your street number" id="signUpNumber" name="numberToSignUp" th:field="*{address.number}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -300,7 +300,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="1" maxlength="10" placeholder="Your building" id="signUpBuilding" name="buildingToSignUp" th:field="*{address.building}"/>
+                                                            <input style="width: 300px;" type="text" minlength="1" maxlength="10" placeholder="Your building" id="signUpBuilding" name="buildingToSignUp" th:field="*{address.building}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -317,7 +317,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="1" maxlength="10" placeholder="Your entrance" id="signUpEntrance" name="entranceToSignUp" th:field="*{address.entrance}"/>
+                                                            <input style="width: 300px;" type="text" minlength="1" maxlength="10" placeholder="Your entrance" id="signUpEntrance" name="entranceToSignUp" th:field="*{address.entrance}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -334,7 +334,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your floor number" id="signUpFloor" name="floorToSignUp" th:field="*{address.floor}"/>
+                                                            <input style="width: 300px;" pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your floor number" id="signUpFloor" name="floorToSignUp" th:field="*{address.floor}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -351,7 +351,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your apartment number" id="signUpApartment" name="apartmentToSignUp" th:field="*{address.apartment}"/>
+                                                            <input style="width: 300px;" pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your apartment number" id="signUpApartment" name="apartmentToSignUp" th:field="*{address.apartment}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -368,7 +368,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="1" maxlength="10" placeholder="Your interphone code" id="signUpInterphone" name="interphoneToSignUp" th:field="*{address.interphone}"/>
+                                                            <input style="width: 300px;" type="text" minlength="1" maxlength="10" placeholder="Your interphone code" id="signUpInterphone" name="interphoneToSignUp" th:field="*{address.interphone}"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -385,7 +385,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" minlength="4" maxlength="10" placeholder="Your postal code" id="signUpPostalCode" name="postalCodeToSignUp" th:field="*{address.postalCode}" required="required"/>
+                                                            <input style="width: 300px;" type="text" minlength="4" maxlength="10" placeholder="Your postal code" id="signUpPostalCode" name="postalCodeToSignUp" th:field="*{address.postalCode}" required="required"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -397,10 +397,10 @@
                         </tr>
                     </tbody>
                 </table> <br>
-                <input type="submit" id="signUpSubmit" value="Sign Up" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" id="signUpSubmit" value="Sign Up" />
             </form> <br>
             <a th:href="@{/}">
-                <input type="submit" value="Go back" />
+                <input style="width: 300px; height: 50px; font-size: larger;" type="submit" value="Return" />
             </a>
         </div>
         <script th:inline="javascript">
