@@ -21,6 +21,57 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
+    @DisplayName("Username is wrong - User can't sign in")
+    void testSignInWrongUsername(){
+        // Arrange
+        String username = "notJohnDoe";
+        String password = "johnDoe123";
+        User user = new User(1L,"John", "Doe", "johnDoe", "johnDoe123", "johndoe@gmail.com", "0740123456", new Address(1L,"England", "East", "Essex", "High Street", 1, "A", "A", 1, 1, "C001", "JD10"));
+        when(userRepository.findUserByUsername(username)).thenReturn(null);
+
+        // Act
+        String result = userService.signInCheck(username, password);
+
+        // Assert
+        assertEquals("Account doesn't exist!", result);
+    }
+
+    @Test
+    @DisplayName("Password is wrong - User can't sign in")
+    void testSignInWrongPassword(){
+        // Arrange
+        String username = "johnDoe";
+        String password = "johnDoe321";
+        User user = new User(1L,"John", "Doe", "johnDoe", "johnDoe123", "johndoe@gmail.com", "0740123456", new Address(1L,"England", "East", "Essex", "High Street", 1, "A", "A", 1, 1, "C001", "JD10"));
+        when(userRepository.findUserByUsername(username)).thenReturn(user);
+
+        // Act
+        String result = userService.signInCheck(username, password);
+
+        // Assert
+        assertEquals("Wrong password!", result);
+    }
+
+    @Test
+    @DisplayName("User can sign in")
+    void testSignIn(){
+        // Arrange
+        String username = "johnDoe";
+        String password = "johnDoe123";
+        User user = new User(1L,"John", "Doe", "johnDoe", "johnDoe123", "johndoe@gmail.com", "0740123456", new Address(1L,"England", "East", "Essex", "High Street", 1, "A", "A", 1, 1, "C001", "JD10"));
+        when(userRepository.findUserByUsername(username)).thenReturn(user);
+        when(userRepository.findUserByUsernameAndPassword(username, password)).thenReturn(user);
+
+        // Act
+        String resultCheck = userService.signInCheck(username, password);
+        User resultSignIn = userService.signIn(username, password);
+
+        // Assert
+        assertEquals("OK", resultCheck);
+        assertEquals(user, resultSignIn);
+    }
+
+    @Test
     @DisplayName("User is created successfully")
     void testCreateUser(){
         // Arrange
@@ -76,12 +127,6 @@ public class UserServiceTest {
         assertEquals(savedUser.getEmail(), result4.getEmail());
         assertEquals(savedUser.getPhoneNr(), result4.getPhoneNr());
         assertEquals(savedUser.getAddress(), result4.getAddress());
-
-        verify(userRepository).findUserByUsername(user.getUsername());
-        verify(userRepository).findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
-        verify(userRepository).findUserByEmail(user.getEmail());
-        verify(userRepository).findUserByPhoneNr(user.getPhoneNr());
-        verify(userRepository).save(user);
     }
 
     @Test
@@ -102,8 +147,6 @@ public class UserServiceTest {
         assertNotEquals(altUser.getUsername(), result.getUsername());
         assertNotEquals(altUser.getPhoneNr(), result.getPhoneNr());
         assertEquals(altUser.getEmail(), result.getEmail());
-
-        verify(userRepository).findUserByEmail(user.getEmail());
     }
 
     @Test
@@ -124,8 +167,6 @@ public class UserServiceTest {
         assertNotEquals(altUser.getUsername(), result.getUsername());
         assertEquals(altUser.getPhoneNr(), result.getPhoneNr());
         assertNotEquals(altUser.getEmail(), result.getEmail());
-
-        verify(userRepository).findUserByPhoneNr(user.getPhoneNr());
     }
 
     @Test
@@ -146,33 +187,19 @@ public class UserServiceTest {
         assertEquals(altUser.getUsername(), result.getUsername());
         assertNotEquals(altUser.getPhoneNr(), result.getPhoneNr());
         assertNotEquals(altUser.getEmail(), result.getEmail());
-
-        verify(userRepository).findUserByUsername(user.getUsername());
     }
 
     @Test
     @DisplayName("User is updated successfully")
     void testUpdateUser(){
         // Arrange
-        User user = new User(1L, "John", "Doe", "johnDoe", "johnDoe123", "johndoe@gmail.com", "0740123456", new Address("England", "East", "Essex", "High Street", 1, "A", "A", 1, 1, "C001", "JD10"));
+        User user = new User("John", "Doe", "johnDoe", "johnDoe123", "johndoe@gmail.com", "0740123456", new Address("England", "East", "Essex", "High Street", 1, "A", "A", 1, 1, "C001", "JD10"));
         User updatedUser = new User(1L,"Joe", "Don", "johnDoe", "joeDon123", "joedon@gmail.com", "0749123456", new Address(1L,"England", "East", "Essex", "High Street", 2, "B", "B", 2, 2, "C002", "JD20"));
-        when(userRepository.save(user)).thenReturn(updatedUser);
         when(userRepository.findUserByUsername(user.getUsername())).thenReturn(updatedUser);
 
         // Act
-        user.setFirstName("Joe");
-        user.setLastName("Don");
-        user.setPassword("joeDon123");
-        user.setEmail("joedon@gmail.com");
-        user.setPhoneNr("0749123456");
-        user.getAddress().setNumber(2);
-        user.getAddress().setBuilding("B");
-        user.getAddress().setEntrance("B");
-        user.getAddress().setFloor(2);
-        user.getAddress().setApartment(2);
-        user.getAddress().setInterphone("C002");
-        user.getAddress().setPostalCode("JD20");
-        userService.editUser(user);
+        userService.signUp(user);
+        userService.editUser(updatedUser);
         User result = userRepository.findUserByUsername(user.getUsername());
 
         // Assert
@@ -185,9 +212,6 @@ public class UserServiceTest {
         assertEquals(updatedUser.getEmail(), result.getEmail());
         assertEquals(updatedUser.getPhoneNr(), result.getPhoneNr());
         assertEquals(updatedUser.getAddress(), result.getAddress());
-
-        verify(userRepository).findUserByUsername(user.getUsername());
-        verify(userRepository).save(user);
     }
 
     @Test
@@ -203,9 +227,6 @@ public class UserServiceTest {
 
         // Assert
         assertNull(result);
-
-        verify(userRepository).findUserByUsername(user.getUsername());
-        verify(userRepository).delete(user);
     }
 
 }
