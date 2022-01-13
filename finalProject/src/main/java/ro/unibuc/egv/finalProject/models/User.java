@@ -3,6 +3,7 @@ package ro.unibuc.egv.finalProject.models;
 import javax.persistence.*;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "users")
 public class User {
@@ -33,6 +34,16 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
+
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNr, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phoneNr = phoneNr;
+        this.address = address;
+    }
 
     public User(Long userID, String firstName, String lastName, String username, String password, String email, String phoneNr, Address address) {
         this.userID = userID;

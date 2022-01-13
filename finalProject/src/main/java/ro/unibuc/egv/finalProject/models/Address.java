@@ -3,6 +3,7 @@ package ro.unibuc.egv.finalProject.models;
 import javax.persistence.*;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "addresses")
 public class Address {
@@ -47,6 +48,20 @@ public class Address {
 
     @OneToOne(mappedBy = "address")
     private User user;
+
+    public Address(String country, String district, String city, String street, Integer number, String building, String entrance, Integer floor, Integer apartment, String interphone, String postalCode) {
+        this.country = country;
+        this.district = district;
+        this.city = city;
+        this.street = street;
+        this.number = number;
+        this.building = building;
+        this.entrance = entrance;
+        this.floor = floor;
+        this.apartment = apartment;
+        this.interphone = interphone;
+        this.postalCode = postalCode;
+    }
 
     public Address(Long addressID, String country, String district, String city, String street, Integer number, String building, String entrance, Integer floor, Integer apartment, String interphone, String postalCode) {
         this.addressID = addressID;

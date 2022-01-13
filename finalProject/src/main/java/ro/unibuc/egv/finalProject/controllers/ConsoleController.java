@@ -4,10 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ro.unibuc.egv.finalProject.mail.MailSenderPSM;
 import ro.unibuc.egv.finalProject.models.Console;
 import ro.unibuc.egv.finalProject.models.Product;
+import ro.unibuc.egv.finalProject.models.User;
 import ro.unibuc.egv.finalProject.services.ConsoleService;
 import ro.unibuc.egv.finalProject.services.ProductService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ConsoleController {
@@ -21,16 +25,15 @@ public class ConsoleController {
     }
 
     //region Consoles page
-    @RequestMapping("/store/consoles")
-    @GetMapping("store/consoles")
+    @RequestMapping(value = "/store/consoles", method = RequestMethod.GET)
     public String consolesInit(Model model){
         System.out.println("Consoles page accessed!");
         model.addAttribute("consolesList", consoleService.getConsoles());
         return "consoles";
     }
 
-    @PostMapping("store/consoles")
-    public String buyConsole(@RequestParam("consoleToBuyID") Long id, RedirectAttributes redirectAttributes){
+    @RequestMapping(value = "/store/consoles", method = RequestMethod.POST)
+    public String buyConsole(@RequestParam("consoleToBuyID") Long id, RedirectAttributes redirectAttributes, HttpSession httpSession){
         Console console = consoleService.getConsoleByID(id);
         if (console.getProduct().getStatus().equals("Unavailable")){
             redirectAttributes.addFlashAttribute("errorBuyConsole", console.getProduct().getName() + " is out of stock!");
@@ -45,22 +48,23 @@ public class ConsoleController {
         consoleService.updateConsoleQuantity(console);
         redirectAttributes.addFlashAttribute("successBuyConsole", console.getProduct().getName() + " has been bought successfully!");
         redirectAttributes.addFlashAttribute("checkMail", "Check your email for more details!");
+        MailSenderPSM mailSenderPSM = new MailSenderPSM((User) httpSession.getAttribute("currentUser"), console.getProduct(), "PSM - Console Purchase");
+        mailSenderPSM.sendMessage();
         return "redirect:/store/consoles";
     }
     //endregion
 
     //region Add Consoles page
-    @RequestMapping("/admin/add_products/add_consoles")
-    @GetMapping("/admin/add_products/add_consoles")
+    @RequestMapping(value = "/admin/add_products/add_consoles", method = RequestMethod.GET)
     public String addConsolesInit(Model model){
         System.out.println("Add consoles page accessed!");
         model.addAttribute("newConsole", new Console());
         return "add_consoles";
     }
 
-    @PostMapping("/admin/add_products/add_consoles")
+    @RequestMapping(value = "/admin/add_products/add_consoles", method = RequestMethod.POST)
     public String addNewConsole(@ModelAttribute("newConsole") Console newConsole, Model model, RedirectAttributes redirectAttributes){
-        if (!productService.isProductNameUnique(newConsole.getProduct().getName())) {
+        if (productService.isProductNameNotUnique(newConsole.getProduct().getName())){
             model.addAttribute("errorProductName", "Product name is already in use!");
             return "add_consoles";
         }
@@ -71,15 +75,14 @@ public class ConsoleController {
     //endregion
 
     //region Edit Consoles page
-    @RequestMapping("/admin/edit_products/edit_consoles")
-    @GetMapping("/admin/edit_products/edit_consoles")
+    @RequestMapping(value = "/admin/edit_products/edit_consoles", method = RequestMethod.GET)
     public String editConsolesInit(Model model){
         System.out.println("Edit consoles page accessed!");
         model.addAttribute("consolesList", consoleService.getConsoles());
         return "edit_consoles";
     }
 
-    @PostMapping("/admin/edit_products/edit_consoles")
+    @RequestMapping(value = "/admin/edit_products/edit_consoles", method = RequestMethod.POST)
     public String editConsole(@RequestParam("consoleToEditID") Long id, @RequestParam("consoleToEditProductID") Long productID,
                               @RequestParam("consoleProductNameToEdit") String name, @RequestParam("consoleProductPriceToEdit") Double price,
                               @RequestParam("consoleProductQtyToEdit") Integer quantity, @RequestParam("consoleProductDescToEdit") String description,
@@ -94,7 +97,7 @@ public class ConsoleController {
             model.addAttribute("consolesList", consoleService.getConsoles());
             return "edit_consoles";
         }
-        if (!productService.isProductNameUnique(consoleToEdit.getProduct().getName()) && !consoleToEdit.getProduct().getName().equals(consoleService.getConsoleByID(id).getProduct().getName())) {
+        if (productService.isProductNameNotUnique(consoleToEdit.getProduct().getName()) && !consoleToEdit.getProduct().getName().equals(consoleService.getConsoleByID(id).getProduct().getName())) {
             model.addAttribute("errorEditProductName", "The product name " + consoleToEdit.getProduct().getName() + " is already in use!");
             model.addAttribute("consolesList", consoleService.getConsoles());
             return "edit_consoles";
@@ -106,15 +109,14 @@ public class ConsoleController {
     //endregion
 
     //region Delete Consoles page
-    @RequestMapping("/admin/delete_products/delete_consoles")
-    @GetMapping("/admin/delete_products/delete_consoles")
+    @RequestMapping(value = "/admin/delete_products/delete_consoles", method = RequestMethod.GET)
     public String deleteConsolesInit(Model model){
         System.out.println("Delete consoles page accessed!");
         model.addAttribute("consolesList", consoleService.getConsoles());
         return "delete_consoles";
     }
 
-    @PostMapping("/admin/delete_products/delete_consoles")
+    @RequestMapping(value = "/admin/delete_products/delete_consoles", method = RequestMethod.POST)
     public String deleteConsole(@RequestParam("consoleToDeleteID") Long id, RedirectAttributes redirectAttributes){
         consoleService.deleteConsole(id);
         redirectAttributes.addFlashAttribute("successDeleteConsole", "Console was deleted successfully");

@@ -6,8 +6,157 @@
     </head>
     <body>
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Add Accessories - WIP</h2> <br>
+        <h2 style="text-align:center;">Add Accessories</h2>
+        <h3 style="text-align:center; color: green;" th:if="${successAddAccessory}" th:text="${successAddAccessory}"></h3> <br>
         <div style="text-align: center;">
+            <form method="post" th:action="@{/admin/add_products/add_accessories}" th:object="${newAccessory}">
+                <table style="margin-left:auto; margin-right:auto; border-spacing: 10em 0; padding-top: 1em; padding-bottom: 1em;">
+                    <tbody>
+                        <!--Product Name-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryProductName">Product Name</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: red;" th:if="${errorProductName}" th:text="${errorProductName}"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="3" maxlength="50" placeholder="The product name" id="addAccessoryProductName" name="accessoryProductNameToAdd" th:field="*{product.name}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Price-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryProductPrice">Product Price</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="number" step="0.01" min="1" max="10000" placeholder="The product price" id="addAccessoryProductPrice" name="accessoryProductPriceToAdd" th:field="*{product.price}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Quantity-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryProductQty">Product Quantity</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="number" min="1" max="9223372036854775807" placeholder="The product quantity" id="addAccessoryProductQty" name="accessoryProductQtyToAdd" th:field="*{product.quantity}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Description-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryProductDesc">Product Description</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="10" maxlength="1000" placeholder="The product description" id="addAccessoryProductDesc" name="accessoryProductDescToAdd" th:field="*{product.description}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Accessory Type-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryType">Accessory Type</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="3" maxlength="50" placeholder="The accessory type" id="addAccessoryType" name="accessoryTypeToAdd" th:field="*{type}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Accessory Brand-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryBrand">Accessory Brand</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="50" placeholder="The accessory brand" id="addAccessoryBrand" name="accessoryBrandToAdd" th:field="*{brand}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Accessory Compatibility-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryCompatibility">Accessory Compatibility</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="50" placeholder="The accessory compatibility" id="addAccessoryCompatibility" name="accessoryCompatibilityToAdd" th:field="*{compatibility}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Accessory Color-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addAccessoryColor">Accessory Color</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="3" maxlength="50" placeholder="The accessory color" id="addAccessoryColor" name="accessoryColorToAdd" th:field="*{color}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> <br>
+                <input type="submit" id="addAccessorySubmit" value="Add Accessory" />
+            </form> <br>
             <a th:href="@{/admin/add_products}">
                 <input type="submit" value="Go back" />
             </a>

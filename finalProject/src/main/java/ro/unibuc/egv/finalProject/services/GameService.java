@@ -9,12 +9,13 @@ import java.util.List;
 @Service
 public class GameService {
 
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
     public GameService(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
 
+    //region Getters
     public Game getGameByID(Long id){
         return gameRepository.findGameByGameID(id);
     }
@@ -22,9 +23,36 @@ public class GameService {
     public List<Game> getGames(){
         return gameRepository.findAll();
     }
+    //endregion
 
+    //region Quantity Update
     public void updateGameQuantity(Game game){
         gameRepository.save(game);
     }
+    //endregion
+
+    //region Add Game
+    public void addGame(Game game){
+        game.getProduct().setStatus("Available");
+        gameRepository.save(game);
+    }
+    //endregion
+
+    //region Edit Game
+    public void editGame(Game game){
+        if (game.getProduct().getQuantity() > 0) {
+            game.getProduct().setStatus("Available");
+        } else {
+            game.getProduct().setStatus("Unavailable");
+        }
+        gameRepository.save(game);
+    }
+    //endregion
+
+    //region Delete Game
+    public void deleteGame(Long id){
+        gameRepository.deleteById(id);
+    }
+    //endregion
 
 }

@@ -4,13 +4,67 @@
         <meta charset="UTF-8">
         <title>PSM - Delete Games</title>
     </head>
-    <body>
+    <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Delete Games - WIP</h2> <br>
+        <h2 style="text-align:center;">Delete Games</h2> <br>
+        <div id="contentDeleteGames" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price (USD)</th>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                        <th>Platform</th>
+                        <th>Edition</th>
+                        <th>Genre</th>
+                        <th>Game Mode</th>
+                        <th>Publisher</th>
+                        <th>Developer</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="game: ${gamesList}">
+                        <td th:text="${game.product.name}"></td>
+                        <td th:text="${game.product.price}"></td>
+                        <td th:text="${game.product.quantity}"></td>
+                        <td th:text="${game.product.description}"></td>
+                        <td th:text="${game.platform}"></td>
+                        <td th:text="${game.edition}"></td>
+                        <td th:text="${game.genre}"></td>
+                        <td th:text="${game.gameMode}"></td>
+                        <td th:text="${game.publisher}"></td>
+                        <td th:text="${game.developer}"></td>
+                        <form method="post" th:action="@{/admin/delete_products/delete_games}">
+                            <td>
+                                <input type="hidden" name="gameToDeleteID" th:value="${game.gameID}"/>
+                                <input type="submit" value="Delete game"/>
+                            </td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table> <br>
+        </div>
+        <div id="noContentDeleteGames" style="text-align:center;">
+            <h3 style="text-align:center;">There are no games left to delete!</h3>
+        </div>
+        <h3 style="text-align: center; color: green;" th:if="${successDeleteGame}" th:text="${successDeleteGame}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/admin/delete_products}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(gamesList)}]]) {
+                    document.getElementById('contentDeleteGames').style.display = "block";
+                    document.getElementById('noContentDeleteGames').style.display = "none";
+                } else {
+                    document.getElementById('contentDeleteGames').style.display = "none";
+                    document.getElementById('noContentDeleteGames').style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>

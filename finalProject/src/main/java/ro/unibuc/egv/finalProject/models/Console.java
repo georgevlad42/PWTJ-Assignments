@@ -3,6 +3,7 @@ package ro.unibuc.egv.finalProject.models;
 import javax.persistence.*;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "consoles")
 public class Console{
@@ -42,6 +43,19 @@ public class Console{
 
     @Column(name = "color", nullable = false)
     private String color;
+
+    public Console(Product product, String edition, String GPU, String CPU, String memory, String storage, String sound, String OS, String media, String color) {
+        this.product = product;
+        this.edition = edition;
+        this.GPU = GPU;
+        this.CPU = CPU;
+        this.memory = memory;
+        this.storage = storage;
+        this.sound = sound;
+        this.OS = OS;
+        this.media = media;
+        this.color = color;
+    }
 
     public Console(Long consoleID, Product product, String edition, String GPU, String CPU, String memory, String storage, String sound, String OS, String media, String color) {
         this.consoleID = consoleID;

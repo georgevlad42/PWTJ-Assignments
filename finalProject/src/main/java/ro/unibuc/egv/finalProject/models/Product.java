@@ -3,6 +3,7 @@ package ro.unibuc.egv.finalProject.models;
 import javax.persistence.*;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "products")
 public class Product {
@@ -35,6 +36,14 @@ public class Product {
 
     @OneToOne(mappedBy = "product")
     private Accessory accessory;
+
+    public Product(String name, Double price, Integer quantity, String description, String status) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.status = status;
+    }
 
     public Product(Long productID, String name, Double price, Integer quantity, String description, String status) {
         this.productID = productID;

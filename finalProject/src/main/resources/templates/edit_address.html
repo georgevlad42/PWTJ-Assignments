@@ -13,193 +13,193 @@
             <form method="post" th:action="@{/settings/edit_address}" th:object="${tempAddress}">
                 <table style="margin-left: auto; margin-right: auto;">
                     <tbody>
-                    <!--Country-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editCountry">Country</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="4" maxlength="50" placeholder="Your country" id="editCountry" name="countryToEdit" th:field="*{country}" required="required"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--District-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editDistrict">District</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="4" maxlength="50" placeholder="Your district" id="editDistrict" name="districtToEdit" th:field="*{district}" required="required"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--City-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editCity">City</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="1" maxlength="50" placeholder="Your city" id="editCity" name="cityToEdit" th:field="*{city}" required="required"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Street-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editStreet">Street</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="4" maxlength="50" placeholder="Your street" id="editStreet" name="streetToEdit" th:field="*{street}" required="required"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Number-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editNumber">Number</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your street number" id="editNumber" name="numberToEdit" th:field="*{number}" required="required"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Building-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editBuilding">Building</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="1" maxlength="10" placeholder="Your building" id="editBuilding" name="buildingToEdit" th:field="*{building}"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Entrance-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editEntrance">Entrance</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="1" maxlength="10" placeholder="Your entrance" id="editEntrance" name="entranceToEdit" th:field="*{entrance}"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Floor-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editFloor">Floor</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your floor number" id="editFloor" name="floorToEdit" th:field="*{floor}"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Apartment-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editApartment">Apartment</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your apartment number" id="editApartment" name="apartmentToEdit" th:field="*{apartment}"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Interphone-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left; padding-bottom: 1em">
-                                <tr>
-                                    <td>
-                                        <label for="editInterphone">Interphone</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="1" maxlength="10" placeholder="Your interphone code" id="editInterphone" name="interphoneToEdit" th:field="*{interphone}"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!--Postal Code-->
-                    <tr>
-                        <td>
-                            <table style="text-align:left;">
-                                <tr>
-                                    <td>
-                                        <label for="editPostalCode">Postal Code</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" minlength="4" maxlength="10" placeholder="Your postal code" id="editPostalCode" name="postalCodeToEdit" th:field="*{postalCode}" required="required"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                        <!--Country-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editCountry">Country</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="4" maxlength="50" placeholder="Your country" id="editCountry" name="countryToEdit" th:field="*{country}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--District-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editDistrict">District</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="4" maxlength="50" placeholder="Your district" id="editDistrict" name="districtToEdit" th:field="*{district}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--City-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editCity">City</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="1" maxlength="50" placeholder="Your city" id="editCity" name="cityToEdit" th:field="*{city}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Street-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editStreet">Street</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="4" maxlength="50" placeholder="Your street" id="editStreet" name="streetToEdit" th:field="*{street}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Number-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editNumber">Number</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your street number" id="editNumber" name="numberToEdit" th:field="*{number}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Building-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editBuilding">Building</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="1" maxlength="10" placeholder="Your building" id="editBuilding" name="buildingToEdit" th:field="*{building}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Entrance-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editEntrance">Entrance</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="1" maxlength="10" placeholder="Your entrance" id="editEntrance" name="entranceToEdit" th:field="*{entrance}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Floor-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editFloor">Floor</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your floor number" id="editFloor" name="floorToEdit" th:field="*{floor}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Apartment-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editApartment">Apartment</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input pattern="[0-9]{1,}" minlength="1" maxlength="10" placeholder="Your apartment number" id="editApartment" name="apartmentToEdit" th:field="*{apartment}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Interphone-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left; padding-bottom: 1em">
+                                    <tr>
+                                        <td>
+                                            <label for="editInterphone">Interphone</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="1" maxlength="10" placeholder="Your interphone code" id="editInterphone" name="interphoneToEdit" th:field="*{interphone}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Postal Code-->
+                        <tr>
+                            <td>
+                                <table style="text-align:left;">
+                                    <tr>
+                                        <td>
+                                            <label for="editPostalCode">Postal Code</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="4" maxlength="10" placeholder="Your postal code" id="editPostalCode" name="postalCodeToEdit" th:field="*{postalCode}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
                     </tbody>
                 </table> <br>
                 <input type="submit" id="editAddressSubmit" value="Update address details" />

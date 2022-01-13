@@ -10,39 +10,39 @@
         <div id="contentGames" style="text-align:center;">
             <table style="margin-left:auto; margin-right:auto;">
                 <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Description</th>
-                    <th>Platform</th>
-                    <th>Edition</th>
-                    <th>Genre</th>
-                    <th>Game Mode</th>
-                    <th>Publisher</th>
-                    <th>Developer</th>
-                    <th>Status</th>
-                    <th>Price (USD)</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Platform</th>
+                        <th>Edition</th>
+                        <th>Genre</th>
+                        <th>Game Mode</th>
+                        <th>Publisher</th>
+                        <th>Developer</th>
+                        <th>Status</th>
+                        <th>Price (USD)</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr th:each="game: ${gamesList}">
-                    <td th:text="${game.product.name}"></td>
-                    <td th:text="${game.product.description}"></td>
-                    <td th:text="${game.platform}"></td>
-                    <td th:text="${game.edition}"></td>
-                    <td th:text="${game.genre}"></td>
-                    <td th:text="${game.gameMode}"></td>
-                    <td th:text="${game.publisher}"></td>
-                    <td th:text="${game.developer}"></td>
-                    <td th:text="${game.product.status}"></td>
-                    <td th:text="${game.product.price}"></td>
-                    <form method="post" th:action="@{/store/games}">
-                        <td>
-                            <input type="hidden" name="gameToBuyID" th:value="${game.gameID}"/>
-                            <input type="submit" value="Buy now"/>
-                        </td>
-                    </form>
-                </tr>
+                    <tr th:each="game: ${gamesList}">
+                        <td th:text="${game.product.name}"></td>
+                        <td th:text="${game.product.description}"></td>
+                        <td th:text="${game.platform}"></td>
+                        <td th:text="${game.edition}"></td>
+                        <td th:text="${game.genre}"></td>
+                        <td th:text="${game.gameMode}"></td>
+                        <td th:text="${game.publisher}"></td>
+                        <td th:text="${game.developer}"></td>
+                        <td th:text="${game.product.status}"></td>
+                        <td th:text="${game.product.price}"></td>
+                        <form method="post" th:action="@{/store/games}">
+                            <td>
+                                <input type="hidden" name="gameToBuyID" th:value="${game.gameID}"/>
+                                <input type="submit" value="Buy now"/>
+                            </td>
+                        </form>
+                    </tr>
                 </tbody>
             </table> <br>
         </div>

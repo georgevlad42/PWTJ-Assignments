@@ -6,8 +6,191 @@
     </head>
     <body>
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Add Games - WIP</h2> <br>
+        <h2 style="text-align:center;">Add Games</h2>
+        <h3 style="text-align:center; color: green;" th:if="${successAddGame}" th:text="${successAddGame}"></h3> <br>
         <div style="text-align: center;">
+            <form method="post" th:action="@{/admin/add_products/add_games}" th:object="${newGame}">
+                <table style="margin-left:auto; margin-right:auto; border-spacing: 10em 0; padding-top: 1em; padding-bottom: 1em;">
+                    <tbody>
+                        <!--Product Name-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameProductName">Product Name</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: red;" th:if="${errorProductName}" th:text="${errorProductName}"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="3" maxlength="50" placeholder="The product name" id="addGameProductName" name="gameProductNameToAdd" th:field="*{product.name}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Price-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameProductPrice">Product Price</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="number" step="0.01" min="1" max="10000" placeholder="The product price" id="addGameProductPrice" name="gameProductPriceToAdd" th:field="*{product.price}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Quantity-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameProductQty">Product Quantity</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="number" min="1" max="9223372036854775807" placeholder="The product quantity" id="addGameProductQty" name="gameProductQtyToAdd" th:field="*{product.quantity}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Product Description-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameProductDesc">Product Description</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="10" maxlength="1000" placeholder="The product description" id="addGameProductDesc" name="gameProductDescToAdd" th:field="*{product.description}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Game Platform-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGamePlatform">Game Platform</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="20" placeholder="The game platform" id="addGamePlatform" name="gamePlatformToAdd" th:field="*{platform}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Game Edition-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameEdition">Game Edition</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="20" placeholder="The game edition" id="addGameEdition" name="gameEditionToAdd" th:field="*{edition}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Game Genre-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameGenre">Game Genre</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="30" placeholder="The game genre" id="addGameGenre" name="gameGenreToAdd" th:field="*{genre}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Game Mode-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameMode">Game Mode</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="100" placeholder="The game mode" id="addGameMode" name="gameModeToAdd" th:field="*{gameMode}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Game Publisher-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGamePublisher">Game Publisher</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="100" placeholder="The game publisher" id="addGamePublisher" name="gamePublisherToAdd" th:field="*{publisher}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--Game Developer-->
+                        <tr>
+                            <td>
+                                <table style="text-align: left; padding-bottom: 1em;">
+                                    <tr>
+                                        <td>
+                                            <label for="addGameDeveloper">Game Developer</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="5" maxlength="100" placeholder="The game developer" id="addGameDeveloper" name="gameDeveloperToAdd" th:field="*{developer}" required="required"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> <br>
+                <input type="submit" id="addGameSubmit" value="Add Game" />
+            </form> <br>
             <a th:href="@{/admin/add_products}">
                 <input type="submit" value="Go back" />
             </a>

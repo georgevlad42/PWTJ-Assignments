@@ -3,6 +3,7 @@ package ro.unibuc.egv.finalProject.models;
 import javax.persistence.*;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "games")
 public class Game{
@@ -33,6 +34,16 @@ public class Game{
 
     @Column(name = "developer", nullable = false)
     private String developer;
+
+    public Game(Product product, String platform, String edition, String genre, String gameMode, String publisher, String developer) {
+        this.product = product;
+        this.platform = platform;
+        this.edition = edition;
+        this.genre = genre;
+        this.gameMode = gameMode;
+        this.publisher = publisher;
+        this.developer = developer;
+    }
 
     public Game(Long gameID, Product product, String platform, String edition, String genre, String gameMode, String publisher, String developer) {
         this.gameID = gameID;

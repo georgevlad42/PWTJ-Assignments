@@ -6,14 +6,16 @@ import ro.unibuc.egv.finalProject.repositories.ProductRepository;
 @Service
 public class ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public boolean isProductNameUnique(String productName) {
-        if (productRepository.findProductByName(productName) == null) return true;
-        return productName.compareTo(productRepository.findProductByName(productName).getName()) != 0;
+    //region Unique Check
+    public boolean isProductNameNotUnique(String productName) {
+        if (productRepository.findProductByName(productName) == null) return false;
+        return productName.compareTo(productRepository.findProductByName(productName).getName()) == 0;
     }
+    //endregion
 }

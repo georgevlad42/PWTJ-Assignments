@@ -10,20 +10,20 @@
         <div style="text-align: center;">
             <table style="margin-left:auto; margin-right:auto;">
                 <tbody>
-                <tr>
-                    <td>
-                        <form method="post" th:action="@{/settings/delete_user}">
-                            <input type="submit" value="Yes, delete my account!" />
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a th:href="@{/settings}">
-                            <input type="submit" value="No, go back!" />
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <form method="post" th:action="@{/settings/delete_user}">
+                                <input type="submit" value="Yes, delete my account!" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/settings}">
+                                <input type="submit" value="No, go back!" />
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

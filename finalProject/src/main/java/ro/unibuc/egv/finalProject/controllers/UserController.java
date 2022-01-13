@@ -19,7 +19,7 @@ public class UserController {
     }
 
     //region Main page
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(HttpSession httpSession){
         System.out.println("Index page accessed!");
         httpSession.setAttribute("currentUser", null);
@@ -28,13 +28,13 @@ public class UserController {
     //endregion
 
     //region Sign In page
-    @RequestMapping("/signIn")
+    @RequestMapping(value = "/signIn", method = RequestMethod.GET)
     public String signInInit(){
         System.out.println("Sign in page accessed!");
         return "signIn";
     }
 
-    @PostMapping("/signIn")
+    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public String signInUser(@RequestParam("userToSignIn") String username, @RequestParam("passToSignIn") String password, HttpSession httpSession, RedirectAttributes redirectAttributes) {
         if (!userService.signInCheck(username, password).equals("OK")) {
             redirectAttributes.addFlashAttribute("signInCheck", userService.signInCheck(username, password));
@@ -47,26 +47,25 @@ public class UserController {
     //endregion
 
     //region Sign Up page
-    @RequestMapping("/signUp")
-    @GetMapping("/signUp")
+    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public String signUpInit(Model model){
         System.out.println("Sign up page accessed!");
         model.addAttribute("newUser", new User());
         return "signUp";
     }
 
-    @PostMapping("/signUp")
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public String signUpNewUser(@ModelAttribute("newUser") User newUser, Model model, RedirectAttributes redirectAttributes){
         boolean isUnique = true;
-        if (!userService.isUsernameUnique(newUser.getUsername())) {
+        if (userService.isUsernameNotUnique(newUser.getUsername())) {
             isUnique = false;
             model.addAttribute("errorUsername", "Username is already in use!");
         }
-        if (!userService.isEmailUnique(newUser.getEmail())) {
+        if (userService.isEmailNotUnique(newUser.getEmail())) {
             isUnique = false;
             model.addAttribute("errorEmail", "Email is already in use!");
         }
-        if (!userService.isPhoneNrUnique(newUser.getPhoneNr())) {
+        if (userService.isPhoneNrNotUnique(newUser.getPhoneNr())) {
             isUnique = false;
             model.addAttribute("errorPhoneNr", "Phone number is already in use!");
         }
@@ -80,15 +79,15 @@ public class UserController {
     //endregion
 
     //region Store page
-    @RequestMapping("/store")
-    public String storeInit(HttpSession httpSession){
+    @RequestMapping(value = "/store", method = RequestMethod.GET)
+    public String storeInit(){
         System.out.println("Store page accessed!");
         return "store";
     }
     //endregion
 
     //region Settings page
-    @RequestMapping("/settings")
+    @RequestMapping(value = "/settings", method = RequestMethod.GET)
     public String settingsInit(){
         System.out.println("User settings page accessed!");
         return "settings";
@@ -96,15 +95,14 @@ public class UserController {
     //endregion
 
     //region Edit User Details page
-    @RequestMapping("/settings/edit_user")
-    @GetMapping("/settings/edit_user")
+    @RequestMapping(value = "/settings/edit_user", method = RequestMethod.GET)
     public String editUserInit(Model model, HttpSession httpSession){
         System.out.println("Edit user details page accessed!");
         model.addAttribute("tempUser", httpSession.getAttribute("currentUser"));
         return "edit_user";
     }
 
-    @PostMapping("/settings/edit_user")
+    @RequestMapping(value = "/settings/edit_user", method = RequestMethod.POST)
     public String editUser(@ModelAttribute("tempUser") User tempUser, HttpSession httpSession, Model model, RedirectAttributes redirectAttributes){
         boolean isUnique = true;
         tempUser.setUserID(((User) httpSession.getAttribute("currentUser")).getUserID());
@@ -116,11 +114,11 @@ public class UserController {
             model.addAttribute("errorEditUser", "There are no changes made to the user details!");
             return "edit_user";
         }
-        if (!userService.isEmailUnique(tempUser.getEmail()) && !tempUser.getEmail().equals(((User) httpSession.getAttribute("currentUser")).getEmail())) {
+        if (userService.isEmailNotUnique(tempUser.getEmail()) && !tempUser.getEmail().equals(((User) httpSession.getAttribute("currentUser")).getEmail())) {
             isUnique = false;
             model.addAttribute("errorEditEmail", "Email is already in use!");
         }
-        if (!userService.isPhoneNrUnique(tempUser.getPhoneNr()) && !tempUser.getPhoneNr().equals(((User) httpSession.getAttribute("currentUser")).getPhoneNr())) {
+        if (userService.isPhoneNrNotUnique(tempUser.getPhoneNr()) && !tempUser.getPhoneNr().equals(((User) httpSession.getAttribute("currentUser")).getPhoneNr())) {
             isUnique = false;
             model.addAttribute("errorEditPhoneNr", "Phone number is already in use!");
         }
@@ -135,13 +133,13 @@ public class UserController {
     //endregion
 
     //region Delete Account page
-    @RequestMapping("/settings/delete_user")
+    @RequestMapping(value = "/settings/delete_user", method = RequestMethod.GET)
     public String deleteAccountInit(){
         System.out.println("Delete user page accessed!");
         return "delete_user";
     }
 
-    @PostMapping("/settings/delete_user")
+    @RequestMapping(value = "/settings/delete_user", method = RequestMethod.POST)
     public String deleteAccount(HttpSession httpSession, RedirectAttributes redirectAttributes){
         userService.deleteUser((User) httpSession.getAttribute("currentUser"));
         redirectAttributes.addFlashAttribute("deleteMessage", "Account deleted successfully!");
@@ -150,7 +148,7 @@ public class UserController {
     //endregion
 
     //region Admin page
-    @RequestMapping("/admin")
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminInit(){
         System.out.println("Admin page accessed!");
         return "admin";

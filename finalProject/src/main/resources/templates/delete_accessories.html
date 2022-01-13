@@ -4,13 +4,63 @@
         <meta charset="UTF-8">
         <title>PSM - Delete Accessories</title>
     </head>
-    <body>
+    <body th:onload="hideDiv()">
         <h1 style="text-align:center;">PlayStation Mall</h1>
-        <h2 style="text-align:center;">Delete Accessories - WIP</h2> <br>
+        <h2 style="text-align:center;">Delete Accessories</h2> <br>
+        <div id="contentDeleteAccessories" style="text-align:center;">
+            <table style="margin-left:auto; margin-right:auto;">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price (USD)</th>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Brand</th>
+                        <th>Compatibility</th>
+                        <th>Color</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="accessory: ${accessoriesList}">
+                        <td th:text="${accessory.product.name}"></td>
+                        <td th:text="${accessory.product.price}"></td>
+                        <td th:text="${accessory.product.quantity}"></td>
+                        <td th:text="${accessory.product.description}"></td>
+                        <td th:text="${accessory.type}"></td>
+                        <td th:text="${accessory.brand}"></td>
+                        <td th:text="${accessory.compatibility}"></td>
+                        <td th:text="${accessory.color}"></td>
+                        <form method="post" th:action="@{/admin/delete_products/delete_accessories}">
+                            <td>
+                                <input type="hidden" name="accessoryToDeleteID" th:value="${accessory.accessoryID}"/>
+                                <input type="submit" value="Delete accessory"/>
+                            </td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table> <br>
+        </div>
+        <div id="noContentDeleteAccessories" style="text-align:center;">
+            <h3 style="text-align:center;">There are no accessories left to delete!</h3>
+        </div>
+        <h3 style="text-align: center; color: green;" th:if="${successDeleteAccessory}" th:text="${successDeleteAccessory}"></h3>
         <div style="text-align: center;">
             <a th:href="@{/admin/delete_products}">
                 <input type="submit" value="Go back" />
             </a>
         </div>
+        <script th:inline="javascript">
+            function hideDiv(){
+                if (![[${#sets.isEmpty(accessoriesList)}]]) {
+                    document.getElementById('contentDeleteAccessories').style.display = "block";
+                    document.getElementById('noContentDeleteAccessories').style.display = "none";
+                } else {
+                    document.getElementById('contentDeleteAccessories').style.display = "none";
+                    document.getElementById('noContentDeleteAccessories').style.display = "block";
+                }
+            }
+        </script>
     </body>
 </html>

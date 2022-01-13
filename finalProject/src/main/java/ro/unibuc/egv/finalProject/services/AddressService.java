@@ -7,13 +7,15 @@ import ro.unibuc.egv.finalProject.repositories.AddressRepository;
 @Service
 public class AddressService {
 
-    private AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
     public AddressService(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
 
+    //region Edit Address
     public void editAddress(Address address){
         addressRepository.save(address);
     }
+    //endregion
 }

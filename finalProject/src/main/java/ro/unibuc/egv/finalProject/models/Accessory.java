@@ -3,6 +3,7 @@ package ro.unibuc.egv.finalProject.models;
 import javax.persistence.*;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "accessories")
 public class Accessory{
@@ -27,6 +28,14 @@ public class Accessory{
 
     @Column(name = "color", nullable = false)
     private String color;
+
+    public Accessory(Product product, String type, String brand, String compatibility, String color) {
+        this.product = product;
+        this.type = type;
+        this.brand = brand;
+        this.compatibility = compatibility;
+        this.color = color;
+    }
 
     public Accessory(Long accessoryID, Product product, String type, String brand, String compatibility, String color) {
         this.accessoryID = accessoryID;

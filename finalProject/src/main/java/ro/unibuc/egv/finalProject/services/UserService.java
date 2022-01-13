@@ -13,6 +13,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    //region Unique Checks
+    public boolean isUsernameNotUnique(String username) {
+        if (userRepository.findUserByUsername(username) == null) return false;
+        return username.compareTo(userRepository.findUserByUsername(username).getUsername()) == 0;
+    }
+
+    public boolean isEmailNotUnique(String email) {
+        if (userRepository.findUserByEmail(email) == null) return false;
+        return email.compareTo(userRepository.findUserByEmail(email).getEmail()) == 0;
+    }
+
+    public boolean isPhoneNrNotUnique(String phoneNr) {
+        if (userRepository.findUserByPhoneNr(phoneNr) == null) return false;
+        return phoneNr.compareTo(userRepository.findUserByPhoneNr(phoneNr).getPhoneNr()) == 0;
+    }
+    //endregion
+
+    //region Sign In
     public String signInCheck(String username, String password) {
         if (userRepository.findUserByUsername(username) == null || username.compareTo(userRepository.findUserByUsername(username).getUsername()) != 0) return "Account doesn't exist!";
         if (password.compareTo(userRepository.findUserByUsername(username).getPassword()) != 0) return "Wrong password!";
@@ -22,22 +40,9 @@ public class UserService {
     public User signIn(String username, String password) {
         return userRepository.findUserByUsernameAndPassword(username, password);
     }
+    //endregion
 
-    public boolean isUsernameUnique(String username) {
-        if (userRepository.findUserByUsername(username) == null) return true;
-        return username.compareTo(userRepository.findUserByUsername(username).getUsername()) != 0;
-    }
-
-    public boolean isEmailUnique(String email) {
-        if (userRepository.findUserByEmail(email) == null) return true;
-        return email.compareTo(userRepository.findUserByEmail(email).getEmail()) != 0;
-    }
-
-    public boolean isPhoneNrUnique(String phoneNr) {
-        if (userRepository.findUserByPhoneNr(phoneNr) == null) return true;
-        return phoneNr.compareTo(userRepository.findUserByPhoneNr(phoneNr).getPhoneNr()) != 0;
-    }
-
+    //region Sign Up
     public void signUp(User user){
         if (user.getAddress().getBuilding().equals("")){
             user.getAddress().setBuilding(null);
@@ -50,13 +55,18 @@ public class UserService {
         }
         userRepository.save(user);
     }
+    //endregion
 
+    //region Edit User
     public void editUser(User user){
         userRepository.save(user);
     }
+    //endregion
 
+    //region Delete User
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
+    //endregion
 
 }

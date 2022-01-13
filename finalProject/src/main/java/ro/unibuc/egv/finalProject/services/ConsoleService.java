@@ -9,12 +9,13 @@ import java.util.List;
 @Service
 public class ConsoleService {
 
-    private ConsoleRepository consoleRepository;
+    private final ConsoleRepository consoleRepository;
 
     public ConsoleService(ConsoleRepository consoleRepository) {
         this.consoleRepository = consoleRepository;
     }
 
+    //region Getters
     public Console getConsoleByID(Long id){
         return consoleRepository.findConsoleByConsoleID(id);
     }
@@ -22,16 +23,22 @@ public class ConsoleService {
     public List<Console> getConsoles(){
         return consoleRepository.findAll();
     }
+    //endregion
 
+    //region Quantity Update
     public void updateConsoleQuantity(Console console){
         consoleRepository.save(console);
     }
+    //endregion
 
+    //region Add Console
     public void addConsole(Console console){
         console.getProduct().setStatus("Available");
         consoleRepository.save(console);
     }
+    //endregion
 
+    //region Edit Console
     public void editConsole(Console console){
         if (console.getProduct().getQuantity() > 0) {
             console.getProduct().setStatus("Available");
@@ -40,8 +47,11 @@ public class ConsoleService {
         }
         consoleRepository.save(console);
     }
+    //endregion
 
+    //region Delete Console
     public void deleteConsole(Long id){
         consoleRepository.deleteById(id);
     }
+    //endregion
 }
